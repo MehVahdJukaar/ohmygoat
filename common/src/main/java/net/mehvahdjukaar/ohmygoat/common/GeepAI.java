@@ -30,7 +30,7 @@ public class GeepAI {
     private static final float SPEED_MULTIPLIER_WHEN_PANICKING = 2.0F;
     private static final float SPEED_MULTIPLIER_WHEN_PREPARING_TO_RAM = 1.25F;
     private static final UniformInt TIME_BETWEEN_LONG_JUMPS = UniformInt.of(700, 1400);
-    public static final int MAX_LONG_JUMP_HEIGHT = 4;
+    public static final int MAX_LONG_JUMP_HEIGHT = 3;
     public static final int MAX_LONG_JUMP_WIDTH = 4;
     public static final float MAX_JUMP_VELOCITY = 1.5F;
     private static final TargetingConditions RAM_TARGET_CONDITIONS = TargetingConditions.forCombat()
