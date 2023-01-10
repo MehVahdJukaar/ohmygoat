@@ -27,7 +27,8 @@ public class GoatHelmetArmorRenderer implements ArmorRenderer {
 
     @Override
     public void render(PoseStack poseStack, MultiBufferSource vertexConsumers, ItemStack stack, LivingEntity entity,
-                       EquipmentSlot slot, int light, HumanoidModel<LivingEntity> contextModel) {
+                       EquipmentSlot slot, int light, HumanoidModel<LivingEntity> original) {
+        ((HumanoidModel)original).copyPropertiesTo(model.get());
         model.get().renderToBuffer(poseStack, vertexConsumers.getBuffer(RenderType.entityCutout(
                 LOCATION
         )), light, OverlayTexture.NO_OVERLAY, 1, 1, 1f, 1);

@@ -5,6 +5,7 @@ import net.mehvahdjukaar.ohmygoat.client.BarbaricHelmetModel;
 import net.mehvahdjukaar.ohmygoat.client.GeepModel;
 import net.mehvahdjukaar.ohmygoat.client.GeepRenderer;
 import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.renderer.entity.layers.HumanoidArmorLayer;
 
 public class OhMyGoatClient {
 
