@@ -1,0 +1,18 @@
+{
+  "conditions": [
+    {
+      "type": "forge:not",
+      "value": {
+        "modid": "windswept",
+        "type": "forge:mod_loaded"
+      }
+    }
+  ],
+  "type": "minecraft:smoking",
+  "cookingtime": 100,
+  "experience": 0.35,
+  "ingredient": {
+    "item": "goated:chevon"
+  },
+  "result": "goated:cooked_chevon"
+}

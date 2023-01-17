@@ -7,11 +7,11 @@ license="ARR"
 
 [[mods]] #mandatory
 
-modId= "ohmygoat" #mandatory
+modId= "goated" #mandatory
 
 version = "${version}"
 
-displayName="Oh My Goat" #mandatory
+displayName="You've Goat to be kidding me" #mandatory
 
 logoFile="icon.png" #optional
 
@@ -25,21 +25,21 @@ description='''
 Ram blocks for automation, Viking helmets and Geeps!
 '''
 
-[[dependencies.ohmygoat]] #optional
+[[dependencies.goated]] #optional
     modId="forge" #mandatory
     mandatory=true #mandatory
     versionRange="[40,)" #mandatory
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.ohmygoat]]
+[[dependencies.goated]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.19.2,1.20)"
     ordering="NONE"
     side="BOTH"
 
-[[dependencies.ohmygoat]]
+[[dependencies.goated]]
     modId="moonlight"
     mandatory=true
     versionRange="[1.19.2-2.1.20,]"

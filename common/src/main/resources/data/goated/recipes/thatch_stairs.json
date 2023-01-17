@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "goated:thatch"
+    }
+  },
+  "result": {
+    "item": "goated:thatch_stairs",
+    "count": 4
+  }
+}

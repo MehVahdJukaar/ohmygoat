@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
-  "id": "ohmygoat",
+  "id": "goated",
   "version": "${version}",
-  "name": "Oh My Goat",
+  "name": "You've Goat to be kidding me",
   "description": "Ram blocks for automation, Viking helmets and Geeps!",
   "authors": [
     "Mehvahdjukaar, Plantkillable"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/ohmygoat",
-    "sources": "https://github.com/MehVahdJukaar/ohmygoat"
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/goated",
+    "sources": "https://github.com/MehVahdJukaar/goated"
   },
   "license": "ARR",
   "icon": "icon.png",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.mehvahdjukaar.ohmygoat.fabric.OhMyGoatFabric"
+      "net.mehvahdjukaar.goated.fabric.GoatedFabric"
     ]
   },
   "mixins": [

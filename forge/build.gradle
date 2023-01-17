@@ -15,8 +15,8 @@ loom {
         convertAccessWideners = true
         extraAccessWideners.add loom.accessWidenerPath.get().asFile.name
 
-        mixinConfig  "ohmygoat-common.mixins.json"
-        mixinConfig  "ohmygoat.mixins.json"
+        mixinConfig  "goated-common.mixins.json"
+        mixinConfig  "goated.mixins.json"
     }
 }
 
