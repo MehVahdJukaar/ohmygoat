@@ -1,1 +1,105 @@
-{}
+{
+  "geep.hurt": {
+    "subtitle": "subtitle.goated.geep.hurt",
+    "sounds": [
+      {
+        "name": "goated:entity/geep_hurt0",
+        "volume": 0.5
+      },
+      {
+        "name": "goated:entity/geep_hurt1",
+        "volume": 0.5
+      },
+      {
+        "name": "goated:entity/geep_hurt2",
+        "volume": 0.5
+      },
+      {
+        "name": "goated:entity/geep_hurt3",
+        "volume": 0.5
+      }
+    ]
+  },
+  "geep.ambient": {
+    "subtitle": "subtitle.goated.geep.ambient",
+    "sounds": [
+      {
+        "name": "goated:entity/geep_ambient0",
+        "volume": 0.2
+      },
+      {
+        "name": "goated:entity/geep_ambient1",
+        "volume": 0.2
+      }
+    ]
+  },
+  "geep.death": {
+    "subtitle": "subtitle.goated.geep.death",
+    "sounds": [
+      {
+        "name": "goated:entity/geep_death0",
+        "volume": 0.8
+      },
+      {
+        "name": "goated:entity/geep_death1",
+        "volume": 0.8
+      },
+      {
+        "name": "goated:entity/geep_death2",
+        "volume": 0.8
+      },
+      {
+        "name": "goated:entity/geep_death3",
+        "volume": 0.8
+      },
+      {
+        "name": "goated:entity/geep_death4",
+        "volume": 0.8
+      }
+    ]
+  },
+  "geep.milk": {
+    "subtitle": "subtitle.goated.geep.milk",
+    "sounds": [
+      "mob/mooshroom/milk1",
+      "mob/mooshroom/milk2",
+      "mob/mooshroom/milk3",
+      "mob/goat/screaming_milk1",
+      "mob/goat/screaming_milk2",
+      "mob/goat/screaming_milk3",
+      "mob/goat/screaming_milk4",
+      "mob/goat/screaming_milk5"
+    ]
+  },
+  "geep.eat": {
+    "sounds": [
+      "mob/goat/eat1",
+      "mob/goat/eat2",
+      "mob/goat/eat3"
+    ],
+    "subtitle": "subtitles.goated.geep.eat"
+  },
+  "geep.long_jump": {
+    "sounds": [
+      {
+        "name": "mob/goat/jump1",
+        "volume": 0.8
+      },
+      {
+        "name": "mob/goat/jump1",
+        "pitch": 0.8,
+        "volume": 0.8
+      },
+      {
+        "name": "mob/goat/jump2",
+        "volume": 0.8
+      },
+      {
+        "name": "mob/goat/jump2",
+        "pitch": 0.8,
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.goated.geep.long_jump"
+  }
+}

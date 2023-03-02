@@ -1,9 +1,15 @@
 package net.mehvahdjukaar.goated;
 
+import net.mehvahdjukaar.goated.common.*;
+import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
 import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
-import net.mehvahdjukaar.goated.common.*;
+import net.minecraft.core.Registry;
+import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.valueproviders.UniformFloat;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -14,7 +20,14 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.carver.CanyonCarverConfiguration;
+import net.minecraft.world.level.levelgen.carver.CarverDebugSettings;
+import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
+import net.minecraft.world.level.levelgen.carver.WorldCarver;
+import net.minecraft.world.level.levelgen.heightproviders.UniformHeight;
 import net.minecraft.world.level.material.MaterialColor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -47,6 +60,13 @@ public class Goated {
     private static void registerEntityAttributes(RegHelper.AttributeEvent event) {
         event.register(GEEP.get(), Geep.createAttributes());
     }
+
+    public static final Supplier<SoundEvent> HURT_SOUND = RegHelper.registerSound(res("geep.hurt"));
+    public static final Supplier<SoundEvent> DEATH_SOUND = RegHelper.registerSound(res("geep.death"));
+    public static final Supplier<SoundEvent> AMBIENT_SOUND = RegHelper.registerSound(res("geep.ambient"));
+    public static final Supplier<SoundEvent> MILK_SOUND = RegHelper.registerSound(res("geep.milk"));
+    public static final Supplier<SoundEvent> EAT_SOUND = RegHelper.registerSound(res("geep.eat"));
+    public static final Supplier<SoundEvent> LONG_JUMP_SOUND = RegHelper.registerSound(res("geep.long_jump"));
 
     public static final Supplier<SensorType<GeepAdultSensor>> GEEP_ADULT_SENSOR = RegHelper.registerSensor(
             res("geep_adult"), () -> new SensorType<>(GeepAdultSensor::new));
@@ -87,6 +107,7 @@ public class Goated {
         return PlatformHelper.isModLoaded("windswept") ? null : CreativeModeTab.TAB_FOOD;
     }
 
+
     public static <T extends Block> Supplier<T> regWithItem(String name, Supplier<T> blockFactory, CreativeModeTab tab) {
         return regWithItem(name, blockFactory, new Item.Properties().tab(tab), 0);
     }
@@ -113,5 +134,6 @@ public class Goated {
                 PlatformHelper.newEntityType(name, factory, category, width, height,
                         clientTrackingRange, velocityUpdates, updateInterval));
     }
+
 
 }

@@ -107,26 +107,26 @@ public class Geep extends Animal implements Shearable {
 
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.GOAT_AMBIENT;
+        return Goated.AMBIENT_SOUND.get();
     }
 
     @Override
     protected SoundEvent getHurtSound(DamageSource damageSource) {
-        return SoundEvents.GOAT_HURT;
+        return Goated.HURT_SOUND.get();
     }
 
     @Override
     protected SoundEvent getDeathSound() {
-        return SoundEvents.GOAT_DEATH;
+        return Goated.DEATH_SOUND.get();
     }
 
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
-        this.playSound(SoundEvents.SHEEP_STEP, 0.15F, 1.0F);
+        this.playSound(SoundEvents.GOAT_STEP, 0.15F, 1.0F);
     }
 
     protected SoundEvent getMilkingSound() {
-        return SoundEvents.GOAT_MILK;
+        return Goated.MILK_SOUND.get();
     }
 
     @Nullable
@@ -192,7 +192,7 @@ public class Geep extends Animal implements Shearable {
 
     @Override
     public SoundEvent getEatingSound(ItemStack stack) {
-        return SoundEvents.GOAT_EAT;
+        return Goated.EAT_SOUND.get();
     }
 
     @Override

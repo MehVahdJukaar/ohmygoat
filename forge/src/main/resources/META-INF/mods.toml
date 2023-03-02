@@ -25,6 +25,12 @@ description='''
 Ram blocks for automation, Viking helmets and Geeps!
 '''
 
+
+[modproperties.goated]
+    catalogueItemIcon = "goated:ram_block" #catalogue icon
+    configuredBackground = "minecraft:textures/block/snow.png"
+
+
 [[dependencies.goated]] #optional
     modId="forge" #mandatory
     mandatory=true #mandatory

@@ -3,6 +3,7 @@ package net.mehvahdjukaar.goated.common;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.mojang.datafixers.util.Pair;
+import net.mehvahdjukaar.goated.Goated;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.UniformInt;
@@ -96,7 +97,7 @@ public class GeepAI {
                         Pair.of(1,
                                 new LongJumpToRandomPos<>(
                                         TIME_BETWEEN_LONG_JUMPS, MAX_LONG_JUMP_HEIGHT, MAX_LONG_JUMP_WIDTH, MAX_JUMP_VELOCITY,
-                                        goat -> SoundEvents.GOAT_LONG_JUMP
+                                        goat -> Goated.LONG_JUMP_SOUND.get()
                                 )
                         )
                 ),

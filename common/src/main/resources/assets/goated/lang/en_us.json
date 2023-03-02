@@ -12,5 +12,12 @@
   "item.goated.cooked_chevon": "Cooked Chevon",
   "tooltip.goated.barbaric_helmet": "Damage makes you stronger",
   "advancements.goated.geep.title": "Oh My Goat!",
-  "advancements.goated.geep.description": "Crossbreed a Sheep and a Goat"
+  "advancements.goated.geep.description": "Crossbreed a Sheep and a Goat",
+  "subtitle.goated.geep.long_jump": "Geep jumps",
+  "subtitle.goated.geep.death": "Geep dies",
+  "subtitle.goated.geep.milk": "Geep gets milked",
+  "subtitle.goated.geep.eat": "Geep eats",
+  "subtitle.goated.geep.hurt": "Geep hurts",
+  "subtitle.goated.geep.ambient": "Geep bleats"
+
 }
