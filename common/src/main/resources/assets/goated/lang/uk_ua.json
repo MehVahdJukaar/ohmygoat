@@ -1,0 +1,16 @@
+{
+  "block.goated.ram_block": "Таран",
+  "block.goated.thatch": "Солома",
+  "block.goated.thatch_slab": "Плита з соломи",
+  "block.goated.thatch_vertical_slab": "Вертикальна плита з соломи",
+  "block.goated.thatch_stairs": "Сходи з соломи",
+  "entity.goated.geep": "Ківця",
+  "item.goated.barbarian_helmet": "Варварський шолом",
+  "item.goated.barbaric_helmet": "Варварський шолом",
+  "item.goated.geep_spawn_egg": "Яйце виклику ківці",
+  "item.goated.chevon": "Сира козлятина",
+  "item.goated.cooked_chevon": "Смажена козлятина",
+  "tooltip.goated.barbaric_helmet": "Пошкодження робить вас сильнішими",
+  "advancements.goated.geep.title": "Відай... козу?",
+  "advancements.goated.geep.description": "Схрестіть Козу та Вівцю"
+}
