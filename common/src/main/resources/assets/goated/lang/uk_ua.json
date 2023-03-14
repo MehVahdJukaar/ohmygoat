@@ -12,5 +12,11 @@
   "item.goated.cooked_chevon": "Смажена козлятина",
   "tooltip.goated.barbaric_helmet": "Пошкодження робить вас сильнішими",
   "advancements.goated.geep.title": "Відай... козу?",
-  "advancements.goated.geep.description": "Схрестіть Козу та Вівцю"
+  "advancements.goated.geep.description": "Схрестіть Козу та Вівцю",
+  "subtitle.goated.geep.long_jump": "Ківця скаче",
+  "subtitle.goated.geep.death": "Ківця гине",
+  "subtitle.goated.geep.milk": "Ківця доїться",
+  "subtitle.goated.geep.eat": "Ківця їсть",
+  "subtitle.goated.geep.hurt": "Ківцю поранено",
+  "subtitle.goated.geep.ambient": "Ківця мекає"
 }
