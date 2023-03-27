@@ -27,12 +27,12 @@ public class BarbaricHelmetItem extends ArmorItem {
         private final String id = Goated.res("goat").toString();
 
         @Override
-        public int getDurabilityForSlot(EquipmentSlot slot) {
+        public int getDurabilityForType(Type type) {
             return 13 * 15;
         }
 
         @Override
-        public int getDefenseForSlot(EquipmentSlot slot) {
+        public int getDefenseForType(Type type) {
             return 2;
         }
 
@@ -68,7 +68,7 @@ public class BarbaricHelmetItem extends ArmorItem {
     };
 
     public BarbaricHelmetItem(Properties properties) {
-        super(ARMOR_MATERIAL, EquipmentSlot.HEAD, properties);
+        super(ARMOR_MATERIAL, Type.HELMET, properties);
     }
 
     @Override

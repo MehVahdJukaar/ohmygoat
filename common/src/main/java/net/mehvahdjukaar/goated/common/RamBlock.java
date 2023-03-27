@@ -132,7 +132,7 @@ public class RamBlock extends WaterBlock implements IPistonMotionReact {
                     }
                     //TODO: fix piston bug
                     e.setDeltaMovement(vec3.x / 2.0 - impulse.x, dy, vec3.z / 2.0 - impulse.z);
-                    e.hurt(DamageSource.GENERIC, 1);
+                    e.hurt(level.damageSources().generic(), 1);
                 }
                 //   p.knockback(1+0.5*i, -dir.getStepX(), );
             }

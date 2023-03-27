@@ -1,9 +1,9 @@
 package net.mehvahdjukaar.goated;
 
-import net.mehvahdjukaar.moonlight.api.platform.ClientPlatformHelper;
 import net.mehvahdjukaar.goated.client.BarbaricHelmetModel;
 import net.mehvahdjukaar.goated.client.GeepModel;
 import net.mehvahdjukaar.goated.client.GeepRenderer;
+import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 
 public class GoatedClient {
@@ -13,8 +13,8 @@ public class GoatedClient {
     public static final ModelLayerLocation BARBARIC_HELMET = loc("barbaric_helmet");
 
     public static void init() {
-        ClientPlatformHelper.addModelLayerRegistration(GoatedClient::registerLayers);
-        ClientPlatformHelper.addEntityRenderersRegistration(GoatedClient::registerEntityRenderers);
+        ClientHelper.addModelLayerRegistration(GoatedClient::registerLayers);
+        ClientHelper.addEntityRenderersRegistration(GoatedClient::registerEntityRenderers);
     }
 
     public static void setup() {
@@ -25,13 +25,13 @@ public class GoatedClient {
     }
 
 
-    private static void registerLayers(ClientPlatformHelper.ModelLayerEvent event) {
+    private static void registerLayers(ClientHelper.ModelLayerEvent event) {
         event.register(BARBARIC_HELMET, BarbaricHelmetModel::createBodyLayer);
         event.register(GEEP, GeepModel::createBodyLayer);
         event.register(GEEP_FUR, GeepModel::createFurLayer);
     }
 
-    private static void registerEntityRenderers(ClientPlatformHelper.EntityRendererEvent event) {
+    private static void registerEntityRenderers(ClientHelper.EntityRendererEvent event) {
         event.register(Goated.GEEP.get(), GeepRenderer::new);
     }
 
