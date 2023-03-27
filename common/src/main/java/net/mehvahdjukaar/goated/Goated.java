@@ -9,6 +9,7 @@ import net.minecraft.data.BuiltinRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.valueproviders.UniformFloat;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -60,6 +61,8 @@ public class Goated {
     private static void registerEntityAttributes(RegHelper.AttributeEvent event) {
         event.register(GEEP.get(), Geep.createAttributes());
     }
+
+    public static final TagKey<Block> BREAK_BLACKLIST = TagKey.create(Registry.BLOCK_REGISTRY, res("ram_block_blacklist"));
 
     public static final Supplier<SoundEvent> HURT_SOUND = RegHelper.registerSound(res("geep.hurt"));
     public static final Supplier<SoundEvent> DEATH_SOUND = RegHelper.registerSound(res("geep.death"));
