@@ -1,5 +1,5 @@
 {
-    "parent": "supplementaries:block/vertical_slab",
+    "parent": "moonlight:block/vertical_slab",
     "textures": {
         "bottom": "goated:block/thatch_top",
         "top": "goated:block/thatch_top",

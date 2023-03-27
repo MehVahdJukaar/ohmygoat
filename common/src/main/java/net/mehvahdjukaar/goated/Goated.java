@@ -20,6 +20,7 @@ import net.minecraft.world.level.material.MaterialColor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -49,12 +50,26 @@ public class Goated {
     private static void registerItemsToTabs(RegHelper.ItemToTabEvent event) {
         var tabFood = getTabFood();
         if (tabFood != null) {
-            event.addAfter(tabFood, i -> i.is(Items.COOKED_MUTTON), COOKED_CHEVON.get(), RAW_CHEVON.get());
+            event.addAfter(tabFood, i -> i.is(Items.COOKED_MUTTON), RAW_CHEVON.get(), COOKED_CHEVON.get());
         }
         event.addAfter(CreativeModeTabs.COMBAT, i -> i.is(Items.TURTLE_HELMET), BARBARIC_HELMET.get());
         event.add(CreativeModeTabs.SPAWN_EGGS, GEEP_SPAWN_EGG.get());
         event.addBefore(CreativeModeTabs.REDSTONE_BLOCKS, i -> i.is(Items.PISTON), RAM_BLOCK.get().asItem());
-        event.add(CreativeModeTabs.BUILDING_BLOCKS, THATCH_BLOCKS.values().stream().map(Supplier::get).toArray(Block[]::new));
+        addToTab(event ,THATCH_BLOCKS);
+    }
+
+    @Deprecated(forRemoval = true)
+    public static void addToTab(RegHelper.ItemToTabEvent event, Map<RegHelper.VariantType, Supplier<Block>> blocks){
+        Map<RegHelper.VariantType, Supplier<Block>> m = new EnumMap<>(blocks);
+        if(!shouldRegisterVSlab()){
+            m.remove(RegHelper.VariantType.VERTICAL_SLAB);
+        }
+        event.add(CreativeModeTabs.BUILDING_BLOCKS, m.values().stream().map(Supplier::get).toArray(Block[]::new));
+    }
+
+    @Deprecated
+    private static boolean shouldRegisterVSlab() {
+        return PlatHelper.isModLoaded("quark") || PlatHelper.isModLoaded("v_slab_compat");
     }
 
     private static void registerEntityAttributes(RegHelper.AttributeEvent event) {
