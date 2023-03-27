@@ -54,6 +54,7 @@ public class Goated {
         }
         event.addAfter(CreativeModeTabs.COMBAT, i -> i.is(Items.TURTLE_HELMET), BARBARIC_HELMET.get());
         event.add(CreativeModeTabs.SPAWN_EGGS, GEEP_SPAWN_EGG.get());
+        event.add(CreativeModeTabs.FUNCTIONAL_BLOCKS, RAM_BLOCK.get());
         event.addBefore(CreativeModeTabs.REDSTONE_BLOCKS, i -> i.is(Items.PISTON), RAM_BLOCK.get().asItem());
         addToTab(event ,THATCH_BLOCKS);
     }

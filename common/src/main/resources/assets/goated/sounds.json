@@ -25,11 +25,11 @@
     "sounds": [
       {
         "name": "goated:entity/geep_ambient0",
-        "volume": 0.15
+        "volume": 0.1
       },
       {
         "name": "goated:entity/geep_ambient1",
-        "volume": 0.15
+        "volume": 0.1
       }
     ]
   },
