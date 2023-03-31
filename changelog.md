@@ -1,2 +1,1 @@
-* lowered sounds volume
-* 1.19.4
+* Improved and fixed sounds, easter egg included

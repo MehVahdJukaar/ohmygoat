@@ -85,6 +85,7 @@ public class Goated {
     public static final Supplier<SoundEvent> MILK_SOUND = RegHelper.registerSound(res("geep.milk"));
     public static final Supplier<SoundEvent> EAT_SOUND = RegHelper.registerSound(res("geep.eat"));
     public static final Supplier<SoundEvent> LONG_JUMP_SOUND = RegHelper.registerSound(res("geep.long_jump"));
+    public static final Supplier<SoundEvent> INFESTATION_SOUND = RegHelper.registerSound(res("geep.infestation"));
 
     public static final Supplier<SensorType<GeepAdultSensor>> GEEP_ADULT_SENSOR = RegHelper.registerSensor(
             res("geep_adult"), () -> new SensorType<>(GeepAdultSensor::new));

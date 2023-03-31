@@ -42,7 +42,9 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Geep extends Animal implements Shearable {
     public static final EntityDimensions LONG_JUMPING_DIMENSIONS = Goat.LONG_JUMPING_DIMENSIONS;
@@ -135,6 +137,9 @@ public class Geep extends Animal implements Shearable {
         return (AgeableMob) this.getType().create(level);
     }
 
+    //client side
+    private int infestationCounter = 0;
+
     @Override
     protected void customServerAiStep() {
         this.getBrain().tick((ServerLevel) this.level, this);
@@ -142,6 +147,30 @@ public class Geep extends Animal implements Shearable {
         GeepAI.updateActivity(this);
         //on server??
         //  this.eatAnimationTick = this.eatBlockGoal.getEatAnimationTick();
+
+            if (infestationCounter > 0) this.infestationCounter--;
+            else if (level.getGameTime() % (20 * 10) == 0 && level.random.nextInt(10) == 0) {
+                Optional<List<LivingEntity>> memory = this.brain.getMemory(MemoryModuleType.NEAREST_LIVING_ENTITIES);
+                if (memory.isPresent()) {
+                    var l = memory.get();
+                    List<Geep> geeps = new ArrayList<>();
+                    int count = 0;
+                    for (var e : l) {
+                        if (e instanceof Geep g) {
+                            geeps.add(g);
+                            if (e.distanceToSqr(this) < 8 * 8) {
+                                count++;
+                            }
+                            if (count >= 5) {
+                                this.playSound(Goated.INFESTATION_SOUND.get());
+                                geeps.forEach(gg -> gg.infestationCounter = 20 * 30);
+                                this.infestationCounter = 20*60;
+                                break;
+                            }
+                        }
+                    }
+                }
+        }
 
         super.customServerAiStep();
     }
