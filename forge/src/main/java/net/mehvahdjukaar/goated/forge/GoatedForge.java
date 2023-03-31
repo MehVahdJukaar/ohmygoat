@@ -2,7 +2,7 @@ package net.mehvahdjukaar.goated.forge;
 
 import net.mehvahdjukaar.goated.Goated;
 import net.mehvahdjukaar.goated.GoatedClient;
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.MinecraftForge;
@@ -29,7 +29,7 @@ public class GoatedForge {
     public GoatedForge() {
         Goated.commonInit();
 
-        if (PlatHelper.getPhysicalSide().isClient()) {
+        if (PlatformHelper.getEnv().isClient()) {
             GoatedClient.init();
         }
         MinecraftForge.EVENT_BUS.register(this);

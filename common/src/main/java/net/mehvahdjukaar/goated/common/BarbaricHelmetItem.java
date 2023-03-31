@@ -27,12 +27,12 @@ public class BarbaricHelmetItem extends ArmorItem {
         private final String id = Goated.res("goat").toString();
 
         @Override
-        public int getDurabilityForType(Type type) {
+        public int getDurabilityForSlot(EquipmentSlot slot) {
             return 13 * 15;
         }
 
         @Override
-        public int getDefenseForType(Type type) {
+        public int getDefenseForSlot(EquipmentSlot slot) {
             return 2;
         }
 
@@ -68,13 +68,13 @@ public class BarbaricHelmetItem extends ArmorItem {
     };
 
     public BarbaricHelmetItem(Properties properties) {
-        super(ARMOR_MATERIAL, Type.HELMET, properties);
+        super(ARMOR_MATERIAL, EquipmentSlot.HEAD, properties);
     }
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
         super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
-        tooltipComponents.add(Component.translatable( "tooltip.goated.barbaric_helmet")
+        tooltipComponents.add(Component.translatable("tooltip.goated.barbaric_helmet")
                 .withStyle(ChatFormatting.GRAY));
     }
 
@@ -88,7 +88,7 @@ public class BarbaricHelmetItem extends ArmorItem {
     @PlatformOnly(PlatformOnly.FABRIC)
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
         super.inventoryTick(stack, level, entity, slotId, isSelected);
-        if (entity instanceof LivingEntity le && le.getItemBySlot(EquipmentSlot.HEAD)==stack) {
+        if (entity instanceof LivingEntity le && le.getItemBySlot(EquipmentSlot.HEAD) == stack) {
             applyEffects(le);
         }
     }

@@ -2,23 +2,23 @@ package net.mehvahdjukaar.goated.common;
 
 import com.google.gson.JsonParser;
 import net.mehvahdjukaar.goated.Goated;
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
-import net.mehvahdjukaar.moonlight.api.resources.pack.DynServerResourcesGenerator;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynServerResourcesProvider;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.resources.ResourceManager;
 import org.apache.logging.log4j.Logger;
 
-public class PackProvider extends DynServerResourcesGenerator {
+public class PackProvider extends DynServerResourcesProvider {
 
     public static final PackProvider INSTANCE = new PackProvider();
 
     public PackProvider() {
         super(new DynamicDataPack(Goated.res("generated_pack"), Pack.Position.BOTTOM, true, true));
-        this.dynamicPack.setGenerateDebugResources(false);
+        this.dynamicPack.generateDebugResources = (false);
         this.dynamicPack.addNamespaces("minecraft");
     }
 
@@ -92,7 +92,7 @@ public class PackProvider extends DynServerResourcesGenerator {
             if (j.size() != 1) return;
         } catch (Exception ignored) {
         }
-        if (!PlatHelper.isModLoaded("windswept")) {
+        if (!PlatformHelper.isModLoaded("windswept")) {
             dynamicPack.addJson(res, json, ResType.LOOT_TABLES);
         }
     }

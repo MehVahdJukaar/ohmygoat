@@ -163,8 +163,8 @@ public class Geep extends Animal implements Shearable {
                             }
                             if (count >= 5) {
                                 this.playSound(Goated.INFESTATION_SOUND.get());
-                                geeps.forEach(gg -> gg.infestationCounter = 20 * 30);
-                                this.infestationCounter = 20*60;
+                                geeps.forEach(gg -> gg.infestationCounter = 20 * 30 + random.nextInt(20));
+                                this.infestationCounter = 20*60 + random.nextInt(20);
                                 break;
                             }
                         }

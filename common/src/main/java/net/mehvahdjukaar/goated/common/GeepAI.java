@@ -13,7 +13,6 @@ import net.minecraft.world.entity.ai.behavior.*;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.memory.MemoryStatus;
 import net.minecraft.world.entity.ai.targeting.TargetingConditions;
-import net.minecraft.world.entity.animal.goat.GoatAi;
 import net.minecraft.world.entity.schedule.Activity;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -71,16 +70,16 @@ public class GeepAI {
         brain.addActivityWithConditions(
                 Activity.IDLE,
                 ImmutableList.of(
-                        Pair.of(0, SetEntityLookTargetSometimes.create(EntityType.PLAYER, 6.0F, UniformInt.of(30, 60))),
+                        Pair.of(0, new RunSometimes<>(new SetEntityLookTarget(EntityType.PLAYER, 6.0F), UniformInt.of(30, 60))),
                         Pair.of(1, new FollowTemptation(livingEntity -> 1.25F)),
-                        Pair.of(2, BabyFollowAdult.create(ADULT_FOLLOW_RANGE, 1.25F)),
+                        Pair.of(2, new BabyFollowAdult<>(ADULT_FOLLOW_RANGE, 1.25F)),
                         Pair.of(3, new GeepEatGrassBehavior()),
                         Pair.of(
                                 3,
                                 new RunOne<>(
                                         ImmutableList.of(
-                                                Pair.of(RandomStroll.stroll(1.0F), 2),
-                                                Pair.of(SetWalkTargetFromLookTarget.create(1.0F, 3), 2),
+                                                Pair.of(new RandomStroll(1.0F), 2),
+                                                Pair.of(new SetWalkTargetFromLookTarget(1.0F, 3), 2),
                                                 Pair.of(new DoNothing(30, 60), 1)
                                         )
                                 )
@@ -118,4 +117,3 @@ public class GeepAI {
         return Ingredient.of(Items.WHEAT);
     }
 }
-

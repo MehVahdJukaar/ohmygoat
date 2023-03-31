@@ -1,9 +1,9 @@
 package net.mehvahdjukaar.goated;
 
 import net.mehvahdjukaar.goated.common.*;
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.platform.PlatformHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
@@ -12,7 +12,9 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.food.Foods;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -20,7 +22,6 @@ import net.minecraft.world.level.material.MaterialColor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -38,7 +39,6 @@ public class Goated {
 
     public static void commonInit() {
         RegHelper.addAttributeRegistration(Goated::registerEntityAttributes);
-        RegHelper.addItemsToTabsRegistration(Goated::registerItemsToTabs);
         PackProvider.INSTANCE.register();
     }
 
@@ -47,37 +47,11 @@ public class Goated {
     }
 
 
-    private static void registerItemsToTabs(RegHelper.ItemToTabEvent event) {
-        var tabFood = getTabFood();
-        if (tabFood != null) {
-            event.addAfter(tabFood, i -> i.is(Items.COOKED_MUTTON), RAW_CHEVON.get(), COOKED_CHEVON.get());
-        }
-        event.addAfter(CreativeModeTabs.COMBAT, i -> i.is(Items.TURTLE_HELMET), BARBARIC_HELMET.get());
-        event.add(CreativeModeTabs.SPAWN_EGGS, GEEP_SPAWN_EGG.get());
-        event.add(CreativeModeTabs.FUNCTIONAL_BLOCKS, RAM_BLOCK.get());
-        event.addBefore(CreativeModeTabs.REDSTONE_BLOCKS, i -> i.is(Items.PISTON), RAM_BLOCK.get().asItem());
-        addToTab(event ,THATCH_BLOCKS);
-    }
-
-    @Deprecated(forRemoval = true)
-    public static void addToTab(RegHelper.ItemToTabEvent event, Map<RegHelper.VariantType, Supplier<Block>> blocks){
-        Map<RegHelper.VariantType, Supplier<Block>> m = new EnumMap<>(blocks);
-        if(!shouldRegisterVSlab()){
-            m.remove(RegHelper.VariantType.VERTICAL_SLAB);
-        }
-        event.add(CreativeModeTabs.BUILDING_BLOCKS, m.values().stream().map(Supplier::get).toArray(Block[]::new));
-    }
-
-    @Deprecated
-    private static boolean shouldRegisterVSlab() {
-        return PlatHelper.isModLoaded("quark") || PlatHelper.isModLoaded("v_slab_compat");
-    }
-
     private static void registerEntityAttributes(RegHelper.AttributeEvent event) {
         event.register(GEEP.get(), Geep.createAttributes());
     }
 
-    public static final TagKey<Block> BREAK_BLACKLIST = TagKey.create(Registries.BLOCK, res("ram_block_blacklist"));
+    public static final TagKey<Block> BREAK_BLACKLIST = TagKey.create(Registry.BLOCK_REGISTRY, res("ram_block_blacklist"));
 
     public static final Supplier<SoundEvent> HURT_SOUND = RegHelper.registerSound(res("geep.hurt"));
     public static final Supplier<SoundEvent> DEATH_SOUND = RegHelper.registerSound(res("geep.death"));
@@ -86,7 +60,6 @@ public class Goated {
     public static final Supplier<SoundEvent> EAT_SOUND = RegHelper.registerSound(res("geep.eat"));
     public static final Supplier<SoundEvent> LONG_JUMP_SOUND = RegHelper.registerSound(res("geep.long_jump"));
     public static final Supplier<SoundEvent> INFESTATION_SOUND = RegHelper.registerSound(res("geep.infestation"));
-
     public static final Supplier<SensorType<GeepAdultSensor>> GEEP_ADULT_SENSOR = RegHelper.registerSensor(
             res("geep_adult"), () -> new SensorType<>(GeepAdultSensor::new));
 
@@ -94,39 +67,41 @@ public class Goated {
             MobCategory.CREATURE, 0.9f, 1.3f, 10, true, 3);
 
     public static final Supplier<Item> GEEP_SPAWN_EGG = RegHelper.registerItem(res("geep_spawn_egg"), () ->
-            PlatHelper.newSpawnEgg(GEEP, 0xd6c4b5, 0xd6c4b5,
-                    new Item.Properties()));
+            PlatformHelper.newSpawnEgg(GEEP, 0xd6c4b5, 0xd6c4b5,
+                    new Item.Properties().tab(CreativeModeTab.TAB_MISC)));
 
     public static final Supplier<Block> RAM_BLOCK = regWithItem(
             "ram_block",
             () -> new RamBlock(BlockBehaviour.Properties.copy(Blocks.DRIPSTONE_BLOCK)
-                    .strength(4.0f)));
+                    .strength(4.0f)),
+            CreativeModeTab.TAB_DECORATIONS);
 
     public static final Supplier<Item> BARBARIC_HELMET = RegHelper.registerItem(
             res("barbaric_helmet"),
-            () -> new BarbaricHelmetItem(new Item.Properties()));
+            () -> new BarbaricHelmetItem(new Item.Properties().tab(CreativeModeTab.TAB_COMBAT)));
 
     public static final Supplier<Item> RAW_CHEVON = RegHelper.registerItem(
             res("chevon"),
-            () -> new Item(new Item.Properties()
+            () -> new Item(new Item.Properties().tab(getTabFood())
                     .food(Foods.MUTTON)));
 
     public static final Supplier<Item> COOKED_CHEVON = RegHelper.registerItem(
             res("cooked_chevon"),
-            () -> new Item(new Item.Properties().food(Foods.COOKED_MUTTON)));
+            () -> new Item(new Item.Properties().tab(getTabFood())
+                    .food(Foods.COOKED_MUTTON)));
 
     public static final Map<RegHelper.VariantType, Supplier<Block>> THATCH_BLOCKS =
             RegHelper.registerReducedBlockSet(res("thatch"), BlockBehaviour.Properties.copy(Blocks.HAY_BLOCK)
-                    .color(MaterialColor.TERRACOTTA_BROWN));
+                    .color(MaterialColor.TERRACOTTA_BROWN), false);
 
 
     private static CreativeModeTab getTabFood() {
-        return PlatHelper.isModLoaded("windswept") ? null : CreativeModeTabs.FOOD_AND_DRINKS;
+        return PlatformHelper.isModLoaded("windswept") ? null : CreativeModeTab.TAB_FOOD;
     }
 
 
-    public static <T extends Block> Supplier<T> regWithItem(String name, Supplier<T> blockFactory) {
-        return regWithItem(name, blockFactory, new Item.Properties(), 0);
+    public static <T extends Block> Supplier<T> regWithItem(String name, Supplier<T> blockFactory, CreativeModeTab tab) {
+        return regWithItem(name, blockFactory, new Item.Properties().tab(tab), 0);
     }
 
     public static <T extends Block> Supplier<T> regWithItem(String name, Supplier<T> blockFactory, Item.Properties properties, int burnTime) {
@@ -148,7 +123,7 @@ public class Goated {
             String name, EntityType.EntityFactory<T> factory, MobCategory category, float width, float height,
             int clientTrackingRange, boolean velocityUpdates, int updateInterval) {
         return RegHelper.registerEntityType(res(name), () ->
-                PlatHelper.newEntityType(name, factory, category, width, height,
+                PlatformHelper.newEntityType(name, factory, category, width, height,
                         clientTrackingRange, velocityUpdates, updateInterval));
     }
 
