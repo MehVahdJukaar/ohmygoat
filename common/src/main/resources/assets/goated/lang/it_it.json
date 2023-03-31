@@ -1,0 +1,23 @@
+{
+  "block.goated.ram_block": "Blocco ariete",
+  "block.goated.thatch": "Paglia",
+  "block.goated.thatch_slab": "Lastra di paglia",
+  "block.goated.thatch_vertical_slab": "Lastra verticale di paglia",
+  "block.goated.thatch_stairs": "Scalini di paglia",
+  "entity.goated.geep": "Ibrido capra-pecora",
+  "item.goated.barbarian_helmet": "Elmo del barbaro",
+  "item.goated.barbaric_helmet": "Elmo barbarico",
+  "item.goated.geep_spawn_egg": "Uovo generatore di ibrido capra-pecora",
+  "item.goated.chevon": "Carne di capra cruda",
+  "item.goated.cooked_chevon": "Carne di capra cotta",
+  "tooltip.goated.barbaric_helmet": "Il danno ti rende pù forte",
+  "advancements.goated.geep.title": "Oh My Goat!",
+  "advancements.goated.geep.description": "Fai incrociare una pecora e una capra",
+  "subtitle.goated.geep.long_jump": "Ibrido capra-pecora salta",
+  "subtitle.goated.geep.death": "Ibrido capra-pecora muore",
+  "subtitle.goated.geep.milk": "Ibrido capra-pecora viene unta",
+  "subtitle.goated.geep.eat": "Ibrido capra-pecora mangia",
+  "subtitle.goated.geep.hurt": "Ibrido capra-pecora ferita",
+  "subtitle.goated.geep.ambient": "Ibrido capra-pecora bela"
+
+}
