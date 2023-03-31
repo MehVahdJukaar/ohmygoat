@@ -1,0 +1,16 @@
+{
+  "block.goated.ram_block": "ラムブロック",
+  "block.goated.thatch": "葺藁",
+  "block.goated.thatch_slab": "葺藁のハーフブロック",
+  "block.goated.thatch_vertical_slab": "葺藁の縦ハーフブロック",
+  "block.goated.thatch_stairs": "葺藁の階段",
+  "entity.goated.geep": "ギープ",
+  "item.goated.barbarian_helmet": "野蛮なヘルメット",
+  "item.goated.barbaric_helmet": "野蛮なヘルメット",
+  "item.goated.geep_spawn_egg": "ギープのスポーンエッグ",
+  "item.goated.chevon": "生の山羊肉",
+  "item.goated.cooked_chevon": "焼き山羊肉",
+  "tooltip.goated.barbaric_helmet": "体力が低下した際に攻撃力が上昇します",
+  "advancements.goated.geep.title": "オーマイゴート!",
+  "advancements.goated.geep.description": "ヒツジとヤギを交配させる"
+}

@@ -4,19 +4,19 @@
     "sounds": [
       {
         "name": "goated:entity/geep_hurt0",
-        "volume": 0.5
+        "volume": 0.35
       },
       {
         "name": "goated:entity/geep_hurt1",
-        "volume": 0.5
+        "volume": 0.35
       },
       {
         "name": "goated:entity/geep_hurt2",
-        "volume": 0.5
+        "volume": 0.35
       },
       {
         "name": "goated:entity/geep_hurt3",
-        "volume": 0.5
+        "volume": 0.35
       }
     ]
   },
@@ -25,11 +25,11 @@
     "sounds": [
       {
         "name": "goated:entity/geep_ambient0",
-        "volume": 0.2
+        "volume": 0.15
       },
       {
         "name": "goated:entity/geep_ambient1",
-        "volume": 0.2
+        "volume": 0.15
       }
     ]
   },
@@ -38,23 +38,23 @@
     "sounds": [
       {
         "name": "goated:entity/geep_death0",
-        "volume": 0.8
+        "volume": 0.7
       },
       {
         "name": "goated:entity/geep_death1",
-        "volume": 0.8
+        "volume": 0.7
       },
       {
         "name": "goated:entity/geep_death2",
-        "volume": 0.8
+        "volume": 0.7
       },
       {
         "name": "goated:entity/geep_death3",
-        "volume": 0.8
+        "volume": 0.7
       },
       {
         "name": "goated:entity/geep_death4",
-        "volume": 0.8
+        "volume": 0.7
       }
     ]
   },

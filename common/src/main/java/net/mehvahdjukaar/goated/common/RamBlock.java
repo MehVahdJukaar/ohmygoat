@@ -1,5 +1,6 @@
 package net.mehvahdjukaar.goated.common;
 
+import net.mehvahdjukaar.goated.Goated;
 import net.mehvahdjukaar.goated.GoatedPlatformStuff;
 import net.mehvahdjukaar.moonlight.api.block.IPistonMotionReact;
 import net.mehvahdjukaar.moonlight.api.block.WaterBlock;
@@ -74,7 +75,7 @@ public class RamBlock extends WaterBlock implements IPistonMotionReact {
         if (extending && canBreakInDir(state, direction) && level instanceof ServerLevel sl) {
             BlockPos toBreakPos = pos.relative(direction);
             BlockState toBreak = level.getBlockState(toBreakPos);
-            if (!toBreak.isAir()) {
+            if (!toBreak.isAir() && !toBreak.is(Goated.BREAK_BLACKLIST)) {
                 float blockHardness = toBreak.getDestroySpeed(level, toBreakPos);
                 level.playSound(null, pos, SoundEvents.GOAT_RAM_IMPACT, SoundSource.BLOCKS, 0.8f, level.random.nextFloat() * 0.25F + 0.65F);
 
@@ -131,7 +132,7 @@ public class RamBlock extends WaterBlock implements IPistonMotionReact {
                     }
                     //TODO: fix piston bug
                     e.setDeltaMovement(vec3.x / 2.0 - impulse.x, dy, vec3.z / 2.0 - impulse.z);
-                    e.hurt(DamageSource.GENERIC, 1);
+                    e.hurt(level.damageSources().generic(), 1);
                 }
                 //   p.knockback(1+0.5*i, -dir.getStepX(), );
             }
