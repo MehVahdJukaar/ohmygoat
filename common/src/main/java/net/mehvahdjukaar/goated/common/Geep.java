@@ -149,7 +149,7 @@ public class Geep extends Animal implements Shearable {
         //  this.eatAnimationTick = this.eatBlockGoal.getEatAnimationTick();
 
             if (infestationCounter > 0) this.infestationCounter--;
-            else if (level.getGameTime() % (20 * 10) == 0 && level.random.nextInt(10) == 0) {
+            else if (level.getGameTime() % (20 * 10) == 0 && level.random.nextInt(20) == 0) {
                 Optional<List<LivingEntity>> memory = this.brain.getMemory(MemoryModuleType.NEAREST_LIVING_ENTITIES);
                 if (memory.isPresent()) {
                     var l = memory.get();
