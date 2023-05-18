@@ -56,21 +56,7 @@ public class Goated {
         event.add(CreativeModeTabs.SPAWN_EGGS, GEEP_SPAWN_EGG.get());
         event.add(CreativeModeTabs.FUNCTIONAL_BLOCKS, RAM_BLOCK.get());
         event.addBefore(CreativeModeTabs.REDSTONE_BLOCKS, i -> i.is(Items.PISTON), RAM_BLOCK.get().asItem());
-        addToTab(event ,THATCH_BLOCKS);
-    }
-
-    @Deprecated(forRemoval = true)
-    public static void addToTab(RegHelper.ItemToTabEvent event, Map<RegHelper.VariantType, Supplier<Block>> blocks){
-        Map<RegHelper.VariantType, Supplier<Block>> m = new EnumMap<>(blocks);
-        if(!shouldRegisterVSlab()){
-            m.remove(RegHelper.VariantType.VERTICAL_SLAB);
-        }
-        event.add(CreativeModeTabs.BUILDING_BLOCKS, m.values().stream().map(Supplier::get).toArray(Block[]::new));
-    }
-
-    @Deprecated
-    private static boolean shouldRegisterVSlab() {
-        return PlatHelper.isModLoaded("quark") || PlatHelper.isModLoaded("v_slab_compat");
+        RegHelper.VariantType.addToTab(event,THATCH_BLOCKS);
     }
 
     private static void registerEntityAttributes(RegHelper.AttributeEvent event) {

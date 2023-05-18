@@ -1,1 +1,2 @@
-* Improved and fixed sounds, easter egg included
+fixed crash
+removed vertical slabs
