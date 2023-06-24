@@ -32,11 +32,6 @@ public class GeepAI {
     public static final int MAX_LONG_JUMP_HEIGHT = 3;
     public static final int MAX_LONG_JUMP_WIDTH = 4;
     public static final float MAX_JUMP_VELOCITY = 1.5F;
-    private static final TargetingConditions RAM_TARGET_CONDITIONS = TargetingConditions.forCombat()
-            .selector(
-                    livingEntity -> !livingEntity.getType().equals(EntityType.GOAT)
-                            && livingEntity.level.getWorldBorder().isWithinBounds(livingEntity.getBoundingBox())
-            );
 
     protected static void initMemories(Geep goat, RandomSource random) {
         goat.getBrain().setMemory(MemoryModuleType.LONG_JUMP_COOLDOWN_TICKS, TIME_BETWEEN_LONG_JUMPS.sample(random));

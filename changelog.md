@@ -1,2 +1,1 @@
-fixed crash
-removed vertical slabs
+1.20

@@ -128,7 +128,7 @@ public class RamBlock extends WaterBlock implements IPistonMotionReact {
                     if (impulse.y != 0) {
                         dy = vec3.y / 2.0 - impulse.y;
                     } else {
-                        dy = e.isOnGround() ? Math.min(0.4, vec3.y / 2.0 + strength) : vec3.y;
+                        dy = e.onGround() ? Math.min(0.4, vec3.y / 2.0 + strength) : vec3.y;
                     }
                     //TODO: fix piston bug
                     e.setDeltaMovement(vec3.x / 2.0 - impulse.x, dy, vec3.z / 2.0 - impulse.z);

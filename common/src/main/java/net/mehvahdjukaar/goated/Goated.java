@@ -4,6 +4,7 @@ import net.mehvahdjukaar.goated.common.*;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.TagKey;
@@ -16,7 +17,7 @@ import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -103,10 +104,10 @@ public class Goated {
 
     public static final Map<RegHelper.VariantType, Supplier<Block>> THATCH_BLOCKS =
             RegHelper.registerReducedBlockSet(res("thatch"), BlockBehaviour.Properties.copy(Blocks.HAY_BLOCK)
-                    .color(MaterialColor.TERRACOTTA_BROWN));
+                    .mapColor(MapColor.TERRACOTTA_BROWN));
 
 
-    private static CreativeModeTab getTabFood() {
+    private static ResourceKey<CreativeModeTab> getTabFood() {
         return PlatHelper.isModLoaded("windswept") ? null : CreativeModeTabs.FOOD_AND_DRINKS;
     }
 

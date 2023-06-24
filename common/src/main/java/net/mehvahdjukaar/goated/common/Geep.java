@@ -142,7 +142,8 @@ public class Geep extends Animal implements Shearable {
 
     @Override
     protected void customServerAiStep() {
-        this.getBrain().tick((ServerLevel) this.level, this);
+        Level level = this.level();
+        this.getBrain().tick((ServerLevel) level, this);
 
         GeepAI.updateActivity(this);
         //on server??
@@ -177,7 +178,7 @@ public class Geep extends Animal implements Shearable {
 
     @Override
     public void aiStep() {
-        if (this.level.isClientSide) {
+        if (this.level().isClientSide) {
             this.eatAnimationTick = Math.max(0, this.eatAnimationTick - 1);
         }
 
@@ -227,13 +228,14 @@ public class Geep extends Animal implements Shearable {
     @Override
     public InteractionResult mobInteract(Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
+        Level level = this.level();
         if (itemStack.is(Items.BUCKET) && !this.isBaby()) {
             player.playSound(this.getMilkingSound(), 1.0F, 1.0F);
             ItemStack itemStack2 = ItemUtils.createFilledResult(itemStack, player, Items.MILK_BUCKET.getDefaultInstance());
             player.setItemInHand(hand, itemStack2);
-            return InteractionResult.sidedSuccess(this.level.isClientSide);
+            return InteractionResult.sidedSuccess(level.isClientSide);
         } else if (itemStack.is(Items.SHEARS)) {
-            if (!this.level.isClientSide && this.readyForShearing()) {
+            if (!level.isClientSide && this.readyForShearing()) {
                 this.shear(SoundSource.PLAYERS);
                 this.gameEvent(GameEvent.SHEAR, player);
                 itemStack.hurtAndBreak(1, player, player1 -> player1.broadcastBreakEvent(hand));
@@ -244,7 +246,7 @@ public class Geep extends Animal implements Shearable {
         } else {
             InteractionResult interactionResult = super.mobInteract(player, hand);
             if (interactionResult.consumesAction() && this.isFood(itemStack)) {
-                this.level.playSound(null, this, this.getEatingSound(itemStack), SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(this.level.random, 0.8F, 1.2F));
+                level.playSound(null, this, this.getEatingSound(itemStack), SoundSource.NEUTRAL, 1.0F, Mth.randomBetween(level.random, 0.8F, 1.2F));
             }
 
             return interactionResult;
@@ -335,7 +337,7 @@ public class Geep extends Animal implements Shearable {
 
     @Override
     public void shear(SoundSource source) {
-        this.level.playSound(null, this, SoundEvents.SHEEP_SHEAR, source, 1.0F, 1.0F);
+        this.level().playSound(null, this, SoundEvents.SHEEP_SHEAR, source, 1.0F, 1.0F);
         this.setSheared(true);
         int i = 1 + this.random.nextInt(3);
         for (int j = 0; j < i; ++j) {
