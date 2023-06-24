@@ -26,9 +26,9 @@ dependencies {
     common(project(path: ":common", configuration: "namedElements")) { transitive false }
     shadowCommon(project(path: ":common", configuration: "transformProductionFabric")) { transitive false }
 
-    modImplementation("curse.maven:yacl-667299:3987709")
+    modCompileOnly("curse.maven:yacl-667299:3987709")
 
-    modImplementation("curse.maven:modmenu-308702:3920481") {
+    modCompileOnly("curse.maven:modmenu-308702:3920481") {
         exclude module: "fabric-api"
     }
 
