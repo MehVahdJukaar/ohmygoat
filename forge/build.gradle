@@ -104,5 +104,11 @@ dependencies {
 
     modImplementation("net.mehvahdjukaar:moonlight-forge:${project.moonlight_version}")
     //modImplementation ("curse.maven:jei-238222:3884337")
+
+    modCompileOnly("curse.maven:autoreglib-250363:4100299")
+    modCompileOnly("curse.maven:quark-oddities-301051:3575623")
+    //modImplementation("curse.maven:quark-243121:4463411")
+    modCompileOnly("curse.maven:quark-243121:4551115")
+
     //modImplementation ("curse.maven:configured-457570:4011355")
 }

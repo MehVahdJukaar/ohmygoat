@@ -3,11 +3,13 @@
   "minVersion": "0.8",
   "package": "net.mehvahdjukaar.goated.mixins.forge",
   "compatibilityLevel": "JAVA_16",
+  "plugin": "net.mehvahdjukaar.goated.mixins.forge.MixinPlugin",
   "client": [
   ],
   "mixins": [
     "SelfBarbarianHelmetMixin",
-    "SelfGeepMixin"
+    "SelfGeepMixin",
+    "SelfCompatQuarkRamBlockMixin"
   ],
   "injectors": {
     "defaultRequire": 1

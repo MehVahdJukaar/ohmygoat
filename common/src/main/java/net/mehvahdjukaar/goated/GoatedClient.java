@@ -5,6 +5,7 @@ import net.mehvahdjukaar.goated.client.GeepModel;
 import net.mehvahdjukaar.goated.client.GeepRenderer;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
 import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.renderer.RenderType;
 
 public class GoatedClient {
 
@@ -18,6 +19,7 @@ public class GoatedClient {
     }
 
     public static void setup() {
+
     }
 
     private static ModelLayerLocation loc(String name) {

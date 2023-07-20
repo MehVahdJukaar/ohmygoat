@@ -44,7 +44,7 @@ public class Goated {
     }
 
     public static void commonSetup() {
-
+        //todo: use fake player
     }
 
 

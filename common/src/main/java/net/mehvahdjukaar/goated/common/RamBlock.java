@@ -10,7 +10,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.Items;
@@ -20,6 +19,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.piston.PistonMovingBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -72,7 +72,11 @@ public class RamBlock extends WaterBlock implements IPistonMotionReact {
 
     @Override
     public void onMoved(BlockState state, Level level, BlockPos pos, Direction direction, boolean extending, PistonMovingBlockEntity tile) {
-        if (extending && canBreakInDir(state, direction) && level instanceof ServerLevel sl) {
+        if(extending) tryBreakAfterMove(state, level, pos, direction);
+    }
+
+    public static void tryBreakAfterMove(BlockState state, Level level, BlockPos pos, Direction direction) {
+        if (canBreakInDir(state, direction) && level instanceof ServerLevel sl) {
             BlockPos toBreakPos = pos.relative(direction);
             BlockState toBreak = level.getBlockState(toBreakPos);
             if (!toBreak.isAir() && !toBreak.is(Goated.BREAK_BLACKLIST)) {
@@ -92,7 +96,7 @@ public class RamBlock extends WaterBlock implements IPistonMotionReact {
                         memory.setTimestamp(0); //this effectively invalidates it
                         level.gameEvent(null, GameEvent.BLOCK_DESTROY, toBreakPos);
                         level.destroyBlockProgress(memory.getBreakerId(), toBreakPos, -1);
-                        return; //no sound
+                        return;
                     } else {
                         level.destroyBlockProgress(memory.getBreakerId(), toBreakPos, breakProgress);
                     }
@@ -138,4 +142,5 @@ public class RamBlock extends WaterBlock implements IPistonMotionReact {
             }
         }
     }
+
 }
