@@ -89,8 +89,9 @@ public class PackProvider extends DynServerResourcesGenerator {
         var o = manager.getResource(ResType.LOOT_TABLES.getPath(res));
         try (var r = o.get().open()) {
             var j = RPUtils.deserializeJson(r);
-            if (j.size() != 1) return;
+            if (j.size() != 2) return;
         } catch (Exception ignored) {
+            if(PlatHelper.isDev())throw new AssertionError();
         }
         if (!PlatHelper.isModLoaded("windswept")) {
             dynamicPack.addJson(res, json, ResType.LOOT_TABLES);

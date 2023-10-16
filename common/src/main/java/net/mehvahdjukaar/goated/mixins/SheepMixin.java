@@ -1,5 +1,7 @@
 package net.mehvahdjukaar.goated.mixins;
 
+import com.llamalad7.mixinextras.sugar.Share;
+import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
 import net.mehvahdjukaar.goated.common.BreedWithGoatGoal;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -20,23 +22,21 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Sheep.class)
 public abstract class SheepMixin extends Animal {
 
-    @Unique
-    private float partialTicks;
-
     protected SheepMixin(EntityType<? extends Animal> entityType, Level level) {
         super(entityType, level);
     }
 
     @Inject(method = "getHeadEatAngleScale", at = @At("HEAD"))
-    public void capturePartialTicks(float partialTick, CallbackInfoReturnable<Float> cir) {
-        this.partialTicks = partialTick;
+    public void capturePartialTicks(float partialTick, CallbackInfoReturnable<Float> cir,
+                                    @Share("partialTicks") LocalFloatRef pt) {
+        pt.set(partialTick);
     }
 
     //fixing vanilla bug
     @Redirect(method = "getHeadEatAngleScale", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/animal/Sheep;getXRot()F"),
             require = 0)
-    public float fixXRotLerp(Sheep instance) {
-        return instance.getViewXRot(partialTicks);
+    public float fixXRotLerp(Sheep instance,  @Share("partialTicks") LocalFloatRef pt) {
+        return instance.getViewXRot(pt.get());
     }
 
     @Inject(method = "registerGoals", at = @At("HEAD"))

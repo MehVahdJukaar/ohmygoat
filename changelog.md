@@ -1,1 +1,1 @@
-fixed broken tags
+fixed loot
