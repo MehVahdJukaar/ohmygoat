@@ -7,7 +7,6 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class GoatedPlatformStuffImpl {
     public static BreakMemory getBreakMemory(ServerLevel level, BlockPos pos, BlockState state) {
-        return level.getCapability(GoatedForge.RAM_BREAK_CAP).resolve().get()
-                .getOrCreateBreakMemory(pos, state);
+        return level.getData(GoatedForge.BREAK_DATA).getOrCreateBreakMemory(pos, state);
     }
 }

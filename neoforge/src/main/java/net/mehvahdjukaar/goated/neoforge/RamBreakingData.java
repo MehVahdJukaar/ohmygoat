@@ -2,66 +2,43 @@ package net.mehvahdjukaar.goated.neoforge;
 
 import net.mehvahdjukaar.goated.common.BreakMemory;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.util.INBTSerializable;
+import org.jetbrains.annotations.UnknownNullability;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 //provider & instance. Only one instance is attached to a world at a time
-public class RamBreakingCap implements ICapabilitySerializable<CompoundTag> {
+public class RamBreakingData implements INBTSerializable<CompoundTag> {
 
     private static final int MAX_TIME = 20 * 10;
 
-    private final LazyOptional<RamBreakingCap> lazyOptional = LazyOptional.of(() -> this);
-
     private final Map<BlockPos, BreakMemory> breakProgress = new HashMap<>();
-    private final ServerLevel level;
+    private ListTag lazyList = null;
 
-    RamBreakingCap(ServerLevel level) {
-        this.level = level;
-    }
-
-    public void invalidate() {
-        lazyOptional.invalidate();
-    }
-
-    @Nonnull
-    @Override
-    public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        return GoatedForge.RAM_BREAK_CAP.orEmpty(cap, lazyOptional);
-    }
-
-    @Override
-    public CompoundTag serializeNBT() {
-        CompoundTag total = new CompoundTag();
-        var l = new ListTag();
-        breakProgress.values().forEach(s -> l.add(s.save()));
-        total.put("RamBreakProgress", l);
-        return total;
-    }
-
-    @Override
-    public void deserializeNBT(CompoundTag tag) {
-        var l = tag.getList("RamBreakProgress", 10);
-        for (var t : l) {
-            var m = BreakMemory.load((CompoundTag) t, this.level);
-            breakProgress.put(m.getPos(), m);
+    public void validateAll(ServerLevel level) {
+        if (lazyList != null) {
+            for (var t : lazyList) {
+                var m = BreakMemory.load((CompoundTag) t, level);
+                breakProgress.put(m.getPos(), m);
+            }
+            lazyList = null;
         }
-    }
 
-    public void validateAll() {
         if (!breakProgress.isEmpty()) {
             var values = new ArrayList<>(breakProgress.keySet());
             for (BlockPos pos : values) {
                 var m = breakProgress.get(pos);
-                if (m == null){
+                if (m == null) {
                     continue;
                 }
                 if (level.getBlockState(pos) != m.getState() || level.getGameTime() - m.getTimestamp() > MAX_TIME) {
@@ -81,4 +58,17 @@ public class RamBreakingCap implements ICapabilitySerializable<CompoundTag> {
         return memory;
     }
 
+    @Override
+    public @UnknownNullability CompoundTag serializeNBT(HolderLookup.Provider arg) {
+        CompoundTag total = new CompoundTag();
+        var l = new ListTag();
+        breakProgress.values().forEach(s -> l.add(s.save()));
+        total.put("RamBreakProgress", l);
+        return total;
+    }
+
+    @Override
+    public void deserializeNBT(HolderLookup.Provider arg, CompoundTag tag) {
+        this.lazyList = tag.getList("RamBreakProgress", 10);
+    }
 }

@@ -12,8 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraftforge.common.IForgeShearable;
-import org.jetbrains.annotations.NotNull;
+import net.neoforged.neoforge.common.IShearable;
 import org.spongepowered.asm.mixin.Mixin;
 
 import javax.annotation.Nullable;
@@ -22,23 +21,22 @@ import java.util.Collections;
 import java.util.List;
 
 @Mixin(Geep.class)
-public abstract class SelfGeepMixin extends Animal implements Shearable, IForgeShearable {
+public abstract class SelfGeepMixin extends Animal implements Shearable, IShearable {
 
     protected SelfGeepMixin(EntityType<? extends Animal> arg, Level arg2) {
         super(arg, arg2);
     }
 
     @Override
-    public boolean isShearable(@NotNull ItemStack item, Level world, BlockPos pos) {
+    public boolean isShearable(@Nullable Player player, ItemStack item, Level level, BlockPos pos) {
         return this.readyForShearing();
     }
 
     @Override
-    @NotNull
-    public List<ItemStack> onSheared(@Nullable Player player, @NotNull ItemStack item, Level world, BlockPos pos, int fortune) {
-        world.playSound(null, this, SoundEvents.SHEEP_SHEAR, player == null ? SoundSource.BLOCKS : SoundSource.PLAYERS, 1.0F, 1.0F);
+    public List<ItemStack> onSheared(@Nullable Player player, ItemStack item, Level level, BlockPos pos) {
+        level.playSound(null, this, SoundEvents.SHEEP_SHEAR, player == null ? SoundSource.BLOCKS : SoundSource.PLAYERS, 1.0F, 1.0F);
         this.gameEvent(GameEvent.SHEAR, player);
-        if (world.isClientSide) {
+        if (level.isClientSide) {
             return Collections.emptyList();
         } else {
             this.getEntityData().set(Geep.IS_SHEARED, true);

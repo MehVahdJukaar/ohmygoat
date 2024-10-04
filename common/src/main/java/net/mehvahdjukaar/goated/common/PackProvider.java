@@ -3,10 +3,12 @@ package net.mehvahdjukaar.goated.common;
 import com.google.gson.JsonParser;
 import net.mehvahdjukaar.goated.Goated;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
+import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.mehvahdjukaar.moonlight.api.resources.RPUtils;
 import net.mehvahdjukaar.moonlight.api.resources.ResType;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynServerResourcesGenerator;
 import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicDataPack;
+import net.mehvahdjukaar.moonlight.api.resources.pack.DynamicResourcePack;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -39,59 +41,84 @@ public class PackProvider extends DynServerResourcesGenerator {
 
         var json = JsonParser.parseString("""
                 {
-                  "type": "minecraft:entity",
-                  "pools": [
-                    {
-                      "bonus_rolls": 0.0,
-                      "entries": [
-                        {
-                          "type": "minecraft:item",
-                          "functions": [
-                            {
-                              "add": false,
-                              "count": {
-                                "type": "minecraft:uniform",
-                                "max": 2.0,
-                                "min": 1.0
-                              },
-                              "function": "minecraft:set_count"
-                            },
-                            {
-                              "conditions": [
-                                {
-                                  "condition": "minecraft:entity_properties",
-                                  "entity": "this",
-                                  "predicate": {
-                                    "flags": {
-                                      "is_on_fire": true
-                                    }
-                                  }
-                                }
-                              ],
-                              "function": "minecraft:furnace_smelt"
-                            },
-                            {
-                              "count": {
-                                "type": "minecraft:uniform",
-                                "max": 1.0,
-                                "min": 0.0
-                              },
-                              "function": "minecraft:looting_enchant"
-                            }
-                          ],
-                          "name": "goated:chevon"
-                        }
-                      ],
-                      "rolls": 1.0
-                    }
-                  ]
-                }""");
+                   "type": "minecraft:entity",
+                   "pools": [
+                     {
+                       "bonus_rolls": 0.0,
+                       "entries": [
+                         {
+                           "type": "minecraft:item",
+                           "functions": [
+                             {
+                               "add": false,
+                               "count": {
+                                 "type": "minecraft:uniform",
+                                 "max": 3.0,
+                                 "min": 1.0
+                               },
+                               "function": "minecraft:set_count"
+                             },
+                             {
+                               "conditions": [
+                                 {
+                                   "condition": "minecraft:any_of",
+                                   "terms": [
+                                     {
+                                       "condition": "minecraft:entity_properties",
+                                       "entity": "this",
+                                       "predicate": {
+                                         "flags": {
+                                           "is_on_fire": true
+                                         }
+                                       }
+                                     },
+                                     {
+                                       "condition": "minecraft:entity_properties",
+                                       "entity": "direct_attacker",
+                                       "predicate": {
+                                         "equipment": {
+                                           "mainhand": {
+                                             "predicates": {
+                                               "minecraft:enchantments": [
+                                                 {
+                                                   "enchantments": "#minecraft:smelts_loot"
+                                                 }
+                                               ]
+                                             }
+                                           }
+                                         }
+                                       }
+                                     }
+                                   ]
+                                 }
+                               ],
+                               "function": "minecraft:furnace_smelt"
+                             },
+                             {
+                               "count": {
+                                 "type": "minecraft:uniform",
+                                 "max": 1.0,
+                                 "min": 0.0
+                               },
+                               "enchantment": "minecraft:looting",
+                               "function": "minecraft:enchanted_count_increase"
+                             }
+                           ],
+                           "name": "goated:chevon"
+                         }
+                       ],
+                       "rolls": 1.0
+                     }
+                   ],
+                   "random_sequence": "minecraft:entities/goat"
+                 }""");
+
         var o = manager.getResource(ResType.LOOT_TABLES.getPath(res));
         try (var r = o.get().open()) {
             var j = RPUtils.deserializeJson(r);
             if (j.size() != 2) return;
         } catch (Exception ignored) {
-            if(PlatHelper.isDev())throw new AssertionError();
+            if (PlatHelper.isDev()) throw new AssertionError();
         }
         if (!PlatHelper.isModLoaded("windswept")) {
             dynamicPack.addJson(res, json, ResType.LOOT_TABLES);

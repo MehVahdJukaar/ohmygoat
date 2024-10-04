@@ -1,19 +1,19 @@
 package net.mehvahdjukaar.goated.neoforge;
 
 import net.mehvahdjukaar.goated.Goated;
-import net.mehvahdjukaar.goated.GoatedClient;
-import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.IModBusEvent;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.tick.LevelTickEvent;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
+
+import java.util.function.Supplier;
 
 /**
  * Author: MehVahdJukaar
@@ -25,63 +25,21 @@ public class GoatedForge {
         Goated.commonInit();
 
         NeoForge.EVENT_BUS.register(this);
-        bus.addListener(GoatedForge::setup);
+        ATTACHMENT_TYPES.register(bus);
     }
 
-    public static void setup(final FMLCommonSetupEvent event) {
-        event.enqueueWork(Goated::commonSetup);
-    }
+    private static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(
+            NeoForgeRegistries.Keys.ATTACHMENT_TYPES, Goated.MOD_ID);
 
-
-    public static final Capability<RamBreakingCap> RAM_BREAK_CAP = CapabilityManager.get(new CapabilityToken<>() {
-    });
-
-
-    @SubscribeEvent
-    public void registerCapabilities(RegisterCapabilitiesEvent event) {
-        event.register(RamBreakingCap.class);
-    }
-
-    @SubscribeEvent
-    public void attachCapabilities(AttachCapabilitiesEvent<Level> event) {
-        if (event.getObject() instanceof ServerLevel serverLevel) {
-            RamBreakingCap capability = new RamBreakingCap(serverLevel);
-            event.addCapability(Goated.res("ram_break_progress"), capability);
-            event.addListener(capability::invalidate);
-        }
-    }
+    // Serialization via INBTSerializable
+    public static final Supplier<AttachmentType<RamBreakingData>> BREAK_DATA = ATTACHMENT_TYPES.register(
+            "ram_breaking_progress", () -> AttachmentType.serializable(RamBreakingData::new).build());
 
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    public void tickEvent(TickEvent.LevelTickEvent event) {
-        if (event.phase == TickEvent.Phase.END && event.level instanceof ServerLevel level) {
-            level.getCapability(RAM_BREAK_CAP).ifPresent(RamBreakingCap::validateAll);
-        }
-    }
-
-
-    @SubscribeEvent
-    public void onRemapBlocks(MissingMappingsEvent event) {
-        for (var v : event.getMappings(ForgeRegistries.BLOCKS.getRegistryKey(), "ohmygoat")) {
-            String name = v.getKey().getPath();
-            if (name.equals("ram_block")) {
-                v.remap(Goated.RAM_BLOCK.get());
-            }
-        }
-        for (var v : event.getMappings(ForgeRegistries.ITEMS.getRegistryKey(), "ohmygoat")) {
-            String name = v.getKey().getPath();
-            switch (name) {
-                case "ram_block" -> v.remap(Goated.RAM_BLOCK.get().asItem());
-                case "chevon" -> v.remap(Goated.RAW_CHEVON.get().asItem());
-                case "cooked_chevon" -> v.remap(Goated.COOKED_CHEVON.get().asItem());
-                case "barbaric_helmet" -> v.remap(Goated.BARBARIC_HELMET.get().asItem());
-                case "geep_spawn_egg" -> v.remap(Goated.GEEP_SPAWN_EGG.get().asItem());
-            }
-        }
-        for (var v : event.getMappings(ForgeRegistries.ENTITY_TYPES.getRegistryKey(), "ohmygoat")) {
-            String name = v.getKey().getPath();
-            if (name.equals("geep")) {
-                v.remap(Goated.GEEP.get());
-            }
+    public void tickEvent(LevelTickEvent.Post event) {
+        Level l = event.getLevel();
+        if (!l.isClientSide && l instanceof ServerLevel level) {
+            level.getData(BREAK_DATA).validateAll(level);
         }
     }
 }

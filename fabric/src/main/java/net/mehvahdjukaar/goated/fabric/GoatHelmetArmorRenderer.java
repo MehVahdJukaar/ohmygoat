@@ -24,7 +24,7 @@ public class GoatHelmetArmorRenderer implements ArmorRenderer {
             Minecraft.getInstance().getEntityModels().bakeLayer(GoatedClient.BARBARIC_HELMET))
     );
 
-    private static final ResourceLocation LOCATION = new ResourceLocation("goated:textures/models/armor/barbaric_helmet.png");
+    private static final ResourceLocation LOCATION = Goated.res("textures/models/armor/barbaric_helmet.png");
 
     @Override
     public void render(PoseStack poseStack, MultiBufferSource vertexConsumers, ItemStack stack, LivingEntity entity,
@@ -32,7 +32,7 @@ public class GoatHelmetArmorRenderer implements ArmorRenderer {
         ((HumanoidModel)original).copyPropertiesTo(model.get());
         model.get().renderToBuffer(poseStack, vertexConsumers.getBuffer(RenderType.entityCutout(
                 LOCATION
-        )), light, OverlayTexture.NO_OVERLAY, 1, 1, 1f, 1);
+        )), light, OverlayTexture.NO_OVERLAY, -1);
     }
 
     public static void register() {

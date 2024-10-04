@@ -102,7 +102,7 @@
       "mob/goat/eat2",
       "mob/goat/eat3"
     ],
-    "subtitle": "subtitles.goated.geep.eat"
+    "subtitle": "subtitle.goated.geep.eat"
   },
   "geep.long_jump": {
     "sounds": [
@@ -125,6 +125,6 @@
         "volume": 0.8
       }
     ],
-    "subtitle": "subtitles.goated.geep.long_jump"
+    "subtitle": "subtitle.goated.geep.long_jump"
   }
 }
