@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.goated.mixins.forge;
+package net.mehvahdjukaar.goated.mixins.neoforge;
 
 import net.mehvahdjukaar.goated.common.Geep;
 import net.minecraft.core.BlockPos;

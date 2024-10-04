@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:sheep_food",
+    "#minecraft:goat_food"
+  ]
+}

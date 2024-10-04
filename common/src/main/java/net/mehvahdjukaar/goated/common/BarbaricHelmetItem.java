@@ -4,6 +4,7 @@ import dev.architectury.injectables.annotations.PlatformOnly;
 import net.mehvahdjukaar.goated.Goated;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -21,61 +22,17 @@ import java.util.List;
 
 public class BarbaricHelmetItem extends ArmorItem {
 
-    public static final ArmorMaterial ARMOR_MATERIAL = new ArmorMaterial() {
-
-        private final Ingredient repair = Ingredient.of(Items.COPPER_INGOT);
-        private final String id = Goated.res("goat").toString();
-
-        @Override
-        public int getDurabilityForType(Type type) {
-            return 13 * 15;
-        }
-
-        @Override
-        public int getDefenseForType(Type type) {
-            return 2;
-        }
-
-        @Override
-        public int getEnchantmentValue() {
-            return 5;
-        }
-
-        @Override
-        public SoundEvent getEquipSound() {
-            return SoundEvents.ARMOR_EQUIP_IRON;
-        }
-
-        @Override
-        public Ingredient getRepairIngredient() {
-            return repair;
-        }
-
-        @Override
-        public String getName() {
-            return id;
-        }
-
-        @Override
-        public float getToughness() {
-            return 0;
-        }
-
-        @Override
-        public float getKnockbackResistance() {
-            return 0.02f;
-        }
-    };
+    protected final MutableComponent TOOLTIP = Component.translatable("tooltip.goated.barbaric_helmet")
+            .withStyle(ChatFormatting.GRAY);
 
     public BarbaricHelmetItem(Properties properties) {
-        super(ARMOR_MATERIAL, Type.HELMET, properties);
+        super(Goated.BARBARIC_ARMOR_MATERIAL.getHolder(), Type.HELMET, properties);
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced) {
-        super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
-        tooltipComponents.add(Component.translatable( "tooltip.goated.barbaric_helmet")
-                .withStyle(ChatFormatting.GRAY));
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag) {
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+        tooltipComponents.add(TOOLTIP);
     }
 
     //@Override

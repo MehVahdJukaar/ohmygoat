@@ -15,7 +15,7 @@ public class BarbaricHelmetModel extends HumanoidModel<LivingEntity> {
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
         float scale = 10 / 8f;
         this.head.xScale *= scale;
         this.head.yScale *= scale;

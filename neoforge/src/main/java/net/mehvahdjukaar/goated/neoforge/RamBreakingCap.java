@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.goated.forge;
+package net.mehvahdjukaar.goated.neoforge;
 
 import net.mehvahdjukaar.goated.common.BreakMemory;
 import net.minecraft.core.BlockPos;
@@ -7,9 +7,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ICapabilitySerializable;
-import net.minecraftforge.common.util.LazyOptional;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

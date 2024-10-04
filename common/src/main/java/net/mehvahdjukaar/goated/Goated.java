@@ -1,12 +1,14 @@
 package net.mehvahdjukaar.goated;
 
 import net.mehvahdjukaar.goated.common.*;
+import net.mehvahdjukaar.moonlight.api.misc.RegSupplier;
 import net.mehvahdjukaar.moonlight.api.platform.PlatHelper;
 import net.mehvahdjukaar.moonlight.api.platform.RegHelper;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -14,6 +16,7 @@ import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.food.Foods;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -21,7 +24,6 @@ import net.minecraft.world.level.material.MapColor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.EnumMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -34,8 +36,11 @@ public class Goated {
     public static final Logger LOGGER = LogManager.getLogger();
 
     public static ResourceLocation res(String name) {
-        return new ResourceLocation(MOD_ID, name);
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, name);
     }
+
+    //todo: use fake player to break blocks
+
 
     public static void commonInit() {
         RegHelper.addAttributeRegistration(Goated::registerEntityAttributes);
@@ -44,7 +49,6 @@ public class Goated {
     }
 
     public static void commonSetup() {
-        //todo: use fake player
     }
 
 
@@ -57,7 +61,7 @@ public class Goated {
         event.add(CreativeModeTabs.SPAWN_EGGS, GEEP_SPAWN_EGG.get());
         event.add(CreativeModeTabs.FUNCTIONAL_BLOCKS, RAM_BLOCK.get());
         event.addBefore(CreativeModeTabs.REDSTONE_BLOCKS, i -> i.is(Items.PISTON), RAM_BLOCK.get().asItem());
-        RegHelper.VariantType.addToTab(event,THATCH_BLOCKS);
+        RegHelper.VariantType.addToTab(event, THATCH_BLOCKS);
     }
 
     private static void registerEntityAttributes(RegHelper.AttributeEvent event) {
@@ -65,6 +69,7 @@ public class Goated {
     }
 
     public static final TagKey<Block> BREAK_BLACKLIST = TagKey.create(Registries.BLOCK, res("ram_block_blacklist"));
+    public static final TagKey<Item> GEEP_FOOD = TagKey.create(Registries.ITEM, res("geep_food"));
 
     public static final Supplier<SoundEvent> HURT_SOUND = RegHelper.registerSound(res("geep.hurt"));
     public static final Supplier<SoundEvent> DEATH_SOUND = RegHelper.registerSound(res("geep.death"));
@@ -77,6 +82,11 @@ public class Goated {
     public static final Supplier<SensorType<GeepAdultSensor>> GEEP_ADULT_SENSOR = RegHelper.registerSensor(
             res("geep_adult"), () -> new SensorType<>(GeepAdultSensor::new));
 
+    public static final RegSupplier<ArmorMaterial> BARBARIC_ARMOR_MATERIAL = RegHelper.registerArmorMaterial(
+            res("barbaric"), 15, () -> Ingredient.of(Items.COPPER_INGOT), 5,
+            () -> SoundEvents.ARMOR_EQUIP_IRON, 0, 0.02f);
+
+
     public static final Supplier<EntityType<Geep>> GEEP = regEntity("geep", Geep::new,
             MobCategory.CREATURE, 0.9f, 1.3f, 10, true, 3);
 
@@ -86,7 +96,7 @@ public class Goated {
 
     public static final Supplier<Block> RAM_BLOCK = regWithItem(
             "ram_block",
-            () -> new RamBlock(BlockBehaviour.Properties.copy(Blocks.DRIPSTONE_BLOCK)
+            () -> new RamBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.DRIPSTONE_BLOCK)
                     .strength(4.0f)));
 
     public static final Supplier<Item> BARBARIC_HELMET = RegHelper.registerItem(
@@ -103,7 +113,7 @@ public class Goated {
             () -> new Item(new Item.Properties().food(Foods.COOKED_MUTTON)));
 
     public static final Map<RegHelper.VariantType, Supplier<Block>> THATCH_BLOCKS =
-            RegHelper.registerReducedBlockSet(res("thatch"), BlockBehaviour.Properties.copy(Blocks.HAY_BLOCK)
+            RegHelper.registerReducedBlockSet(res("thatch"), BlockBehaviour.Properties.ofFullCopy(Blocks.HAY_BLOCK)
                     .mapColor(MapColor.TERRACOTTA_BROWN));
 
 

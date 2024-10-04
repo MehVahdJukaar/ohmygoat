@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.goated.mixins.forge;
+package net.mehvahdjukaar.goated.mixins.neoforge;
 
 import net.mehvahdjukaar.moonlight.api.misc.OptionalMixin;
 import org.objectweb.asm.tree.AnnotationNode;

@@ -3,17 +3,20 @@ package net.mehvahdjukaar.goated.common;
 import com.mojang.serialization.Dynamic;
 import net.mehvahdjukaar.goated.Goated;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.game.DebugPackets;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
@@ -28,6 +31,7 @@ import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.ai.sensing.Sensor;
 import net.minecraft.world.entity.ai.sensing.SensorType;
 import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.animal.goat.Goat;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -39,7 +43,8 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.level.pathfinder.PathType;
+import net.minecraft.world.level.storage.loot.LootTable;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -72,6 +77,8 @@ public class Geep extends Animal implements Shearable {
             MemoryModuleType.IS_TEMPTED,
             MemoryModuleType.IS_PANICKING
     );
+    private static final ResourceKey<LootTable> WOOL_LOOT_TABLE = ResourceKey.create(Registries.LOOT_TABLE,
+            Goated.res("entities/geep_wool"));
     public static final int GOAT_FALL_DAMAGE_REDUCTION = 10;
     public static final EntityDataAccessor<Boolean> IS_SHEARED = SynchedEntityData.defineId(Geep.class, EntityDataSerializers.BOOLEAN);
 
@@ -81,14 +88,16 @@ public class Geep extends Animal implements Shearable {
     public Geep(EntityType<? extends Geep> entityType, Level level) {
         super(entityType, level);
         this.getNavigation().setCanFloat(true);
-        this.setPathfindingMalus(BlockPathTypes.POWDER_SNOW, -1.0F);
-        this.setPathfindingMalus(BlockPathTypes.DANGER_POWDER_SNOW, -1.0F);
+        this.setPathfindingMalus(PathType.POWDER_SNOW, -1.0F);
+        this.setPathfindingMalus(PathType.DANGER_POWDER_SNOW, -1.0F);
     }
 
     @Override
-    protected ResourceLocation getDefaultLootTable() {
+    protected ResourceKey<LootTable> getDefaultLootTable() {
         var r = super.getDefaultLootTable();
-        if (!this.isSheared()) r = new ResourceLocation(r.getNamespace(), r.getPath() + "_wool");
+        if (!this.isSheared()){
+           return WOOL_LOOT_TABLE;
+        }
         return r;
     }
 
@@ -238,7 +247,7 @@ public class Geep extends Animal implements Shearable {
             if (!level.isClientSide && this.readyForShearing()) {
                 this.shear(SoundSource.PLAYERS);
                 this.gameEvent(GameEvent.SHEAR, player);
-                itemStack.hurtAndBreak(1, player, player1 -> player1.broadcastBreakEvent(hand));
+                itemStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
                 return InteractionResult.SUCCESS;
             } else {
                 return InteractionResult.CONSUME;
@@ -258,11 +267,10 @@ public class Geep extends Animal implements Shearable {
     }
 
     @Override
-    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType reason,
-                                        @Nullable SpawnGroupData spawnData, @Nullable CompoundTag dataTag) {
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor level, DifficultyInstance difficulty, MobSpawnType spawnType, @Nullable SpawnGroupData spawnGroupData) {
         RandomSource randomSource = level.getRandom();
         GeepAI.initMemories(this, randomSource);
-        return super.finalizeSpawn(level, difficulty, reason, spawnData, dataTag);
+        return super.finalizeSpawn(level, difficulty, spawnType, spawnGroupData);
     }
 
     @Override
@@ -272,8 +280,8 @@ public class Geep extends Animal implements Shearable {
     }
 
     @Override
-    public EntityDimensions getDimensions(Pose pose) {
-        return pose == Pose.LONG_JUMPING ? LONG_JUMPING_DIMENSIONS.scale(this.getScale()) : super.getDimensions(pose);
+    protected EntityDimensions getDefaultDimensions(Pose pose) {
+        return pose == Pose.LONG_JUMPING ? LONG_JUMPING_DIMENSIONS.scale(this.getScale()) : super.getDefaultDimensions(pose);
     }
 
     @Override
@@ -288,6 +296,11 @@ public class Geep extends Animal implements Shearable {
         this.setSheared(compound.getBoolean("Sheared"));
     }
 
+    @Override
+    public boolean isFood(ItemStack stack) {
+        return stack.is(Goated.GEEP_FOOD);
+    }
+
     public boolean isSheared() {
         return this.entityData.get(IS_SHEARED);
     }
@@ -297,9 +310,9 @@ public class Geep extends Animal implements Shearable {
     }
 
     @Override
-    protected void defineSynchedData() {
-        super.defineSynchedData();
-        this.entityData.define(IS_SHEARED, false);
+    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+        super.defineSynchedData(builder);
+        builder.define(IS_SHEARED, false);
     }
 
     public float getRammingXHeadRot() {

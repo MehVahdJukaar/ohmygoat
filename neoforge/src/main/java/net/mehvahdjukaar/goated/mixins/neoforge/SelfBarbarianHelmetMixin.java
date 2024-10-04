@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.goated.mixins.forge;
+package net.mehvahdjukaar.goated.mixins.neoforge;
 
 import com.google.common.base.Suppliers;
 import net.mehvahdjukaar.goated.GoatedClient;

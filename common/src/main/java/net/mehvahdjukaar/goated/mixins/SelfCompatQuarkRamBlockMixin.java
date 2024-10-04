@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.goated.mixins.forge;
+package net.mehvahdjukaar.goated.mixins;
 
 import net.mehvahdjukaar.goated.common.RamBlock;
 import net.mehvahdjukaar.moonlight.api.misc.OptionalMixin;
@@ -8,9 +8,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
-import vazkii.quark.api.IMagnetMoveAction;
+import org.violetmoon.quark.api.IMagnetMoveAction;
 
-@OptionalMixin("vazkii.quark.api.IMagnetMoveAction")
+@OptionalMixin("org.violetmoon.quark.api.IMagnetMoveAction")
 @Mixin(RamBlock.class)
 public abstract class SelfCompatQuarkRamBlockMixin implements IMagnetMoveAction {
 
