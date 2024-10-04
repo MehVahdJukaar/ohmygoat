@@ -1,10 +1,17 @@
 {
   "conditions": [
     {
-      "type": "forge:not",
+      "type": "neoforge:not",
       "value": {
         "modid": "windswept",
-        "type": "forge:mod_loaded"
+        "type": "neoforge:mod_loaded"
+      }
+    },
+    {
+      "type": "neoforge:not",
+      "value": {
+        "modid": "delightful",
+        "type": "neoforge:mod_loaded"
       }
     }
   ],

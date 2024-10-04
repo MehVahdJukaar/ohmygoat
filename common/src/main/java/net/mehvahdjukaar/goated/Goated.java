@@ -41,6 +41,8 @@ public class Goated {
 
     //todo: use fake player to break blocks
 
+    public static final boolean HAS_OTHER_CHEVON = PlatHelper.isModLoaded("windswept") ||
+            PlatHelper.isModLoaded("delightful");
 
     public static void commonInit() {
         if (PlatHelper.getPhysicalSide().isClient()) {
@@ -122,7 +124,7 @@ public class Goated {
 
 
     private static ResourceKey<CreativeModeTab> getTabFood() {
-        return PlatHelper.isModLoaded("windswept") ? null : CreativeModeTabs.FOOD_AND_DRINKS;
+        return Goated.HAS_OTHER_CHEVON ? null : CreativeModeTabs.FOOD_AND_DRINKS;
     }
 
 

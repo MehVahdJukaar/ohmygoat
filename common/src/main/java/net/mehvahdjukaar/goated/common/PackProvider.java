@@ -120,7 +120,7 @@ public class PackProvider extends DynServerResourcesGenerator {
         } catch (Exception ignored) {
             if (PlatHelper.isDev()) throw new AssertionError();
         }
-        if (!PlatHelper.isModLoaded("windswept")) {
+        if (Goated.HAS_OTHER_CHEVON) {
             dynamicPack.addJson(res, json, ResType.LOOT_TABLES);
         }
     }
