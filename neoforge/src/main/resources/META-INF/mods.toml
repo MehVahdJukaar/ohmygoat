@@ -1,52 +1,46 @@
 
-modLoader="javafml" #mandatory
+modLoader = "javafml"
+loaderVersion = "${loader_version_range}"
 
-loaderVersion="[40,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
-
-license="ARR"
-
-[[mods]] #mandatory
-
-modId= "goated" #mandatory
-
-version = "${version}"
-
-displayName="You've Goat to be kidding me" #mandatory
-
-logoFile="icon.png" #optional
-
-credits="Mehvahdjukaar, Plantkillable" #optional
-
-authors="MehVahdJukaar, Plantkillable" #optional
-
-itemIcon="minecraft:goat_horn" #catalogue icon
-
-description='''
-Ram blocks for automation, Viking helmets and Geeps!
-'''
+license = "${mod_license}"
+issueTrackerURL = "${mod_github}/issues"
 
 
-[modproperties.goated]
-    catalogueItemIcon = "goated:ram_block" #catalogue icon
-    configuredBackground = "minecraft:textures/block/snow.png"
+[[mixins]]
+config = "${mod_id}.mixins.json"
+[[mixins]]
+config = "${mod_id}-common.mixins.json"
 
+[[mods]]
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
+logoFile = "icon.png"
+authors = "${mod_authors}"
+credits = "${mod_credits}"
+description = '''${mod_description}'''
+modUrl = "${mod_homepage}"
+itemIcon = "goated:ram_block" #catalogue icon
 
-[[dependencies.goated]] #optional
-    modId="forge" #mandatory
-    mandatory=true #mandatory
-    versionRange="[40,)" #mandatory
-    ordering="NONE"
-    side="BOTH"
+[[dependencies.${mod_id}]]
+    modId = "neoforge"
+    type = "required"
+    versionRange = "${neo_version_range}"
+    ordering = "NONE"
+    side = "BOTH"
 
-[[dependencies.goated]]
-    modId="minecraft"
-    mandatory=true
-    versionRange="[1.20,1.21)"
-    ordering="NONE"
-    side="BOTH"
+[[dependencies.${mod_id}]]
+    modId = "minecraft"
+    type = "required"
+    versionRange = "[${minecraft_min_version},${minecraft_max_version})"
+    ordering = "NONE"
+    side = "CLIENT"
 
-[[dependencies.goated]]
-    modId="moonlight"
-    mandatory=true
-    versionRange="[1.20-2.5.0,]"
-    side="BOTH"
+[[dependencies.${mod_id}]]
+    modId = "moonlight"
+    type = "required"
+    referralUrl = "https://www.curseforge.com/minecraft/mc-mods/selene"
+    versionRange = "[${moonlight_version_range},]"
+    ordering = "NONE"
+    side = "BOTH"
+

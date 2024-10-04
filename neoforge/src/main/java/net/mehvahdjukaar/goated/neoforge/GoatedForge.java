@@ -7,10 +7,13 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.event.IModBusEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.common.NeoForge;
 
 /**
  * Author: MehVahdJukaar
@@ -18,15 +21,11 @@ import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 @Mod(Goated.MOD_ID)
 public class GoatedForge {
 
-    public GoatedForge() {
+    public GoatedForge(IEventBus bus) {
         Goated.commonInit();
 
-        if (PlatHelper.getPhysicalSide().isClient()) {
-            GoatedClient.init();
-        }
-
-        MinecraftForge.EVENT_BUS.register(this);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(GoatedForge::setup);
+        NeoForge.EVENT_BUS.register(this);
+        bus.addListener(GoatedForge::setup);
     }
 
     public static void setup(final FMLCommonSetupEvent event) {

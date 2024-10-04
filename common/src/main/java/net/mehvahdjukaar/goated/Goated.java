@@ -43,6 +43,10 @@ public class Goated {
 
 
     public static void commonInit() {
+        if (PlatHelper.getPhysicalSide().isClient()) {
+            GoatedClient.init();
+        }
+        PlatHelper.addCommonSetup(Goated::commonSetup);
         RegHelper.addAttributeRegistration(Goated::registerEntityAttributes);
         RegHelper.addItemsToTabsRegistration(Goated::registerItemsToTabs);
         PackProvider.INSTANCE.register();

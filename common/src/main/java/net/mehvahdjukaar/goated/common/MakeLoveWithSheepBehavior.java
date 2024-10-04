@@ -47,7 +47,7 @@ public class MakeLoveWithSheepBehavior extends Behavior<Animal> {
         Animal animal = this.findValidBreedPartner(entity).get();
         entity.getBrain().setMemory(MemoryModuleType.BREED_TARGET, animal);
         animal.getBrain().setMemory(MemoryModuleType.BREED_TARGET, entity);
-        BehaviorUtils.lockGazeAndWalkToEachOther(entity, animal, this.speedModifier);
+        BehaviorUtils.lockGazeAndWalkToEachOther(entity, animal, this.speedModifier, 2);
         int i = MIN_DURATION + entity.getRandom().nextInt(MAX_DURATION - MIN_DURATION);
         this.spawnChildAtTime = gameTime + i;
     }
@@ -69,7 +69,7 @@ public class MakeLoveWithSheepBehavior extends Behavior<Animal> {
     @Override
     protected void tick(ServerLevel level, Animal owner, long gameTime) {
         Animal animal = this.getBreedTarget(owner);
-        BehaviorUtils.lockGazeAndWalkToEachOther(owner, animal, this.speedModifier);
+        BehaviorUtils.lockGazeAndWalkToEachOther(owner, animal, this.speedModifier,2);
         if (owner.closerThan(animal, BREED_RANGE)) {
             if (gameTime >= this.spawnChildAtTime) {
                 BreedWithGoatGoal.spawnChildFromBreeding(level, owner, animal);

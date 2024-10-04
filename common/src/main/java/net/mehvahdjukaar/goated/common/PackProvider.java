@@ -35,7 +35,7 @@ public class PackProvider extends DynServerResourcesGenerator {
     @Override
     public void regenerateDynamicAssets(ResourceManager manager) {
 
-        ResourceLocation res = new ResourceLocation("entities/goat");
+        ResourceLocation res = ResourceLocation.withDefaultNamespace("entities/goat");
 
         var json = JsonParser.parseString("""
                 {

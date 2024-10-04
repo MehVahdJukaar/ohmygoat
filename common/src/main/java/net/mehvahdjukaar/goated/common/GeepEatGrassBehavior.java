@@ -21,7 +21,7 @@ import java.util.function.Predicate;
 
 public class GeepEatGrassBehavior extends Behavior<Animal> {
     private static final int EAT_ANIMATION_TICKS = 40;
-    private static final Predicate<BlockState> IS_TALL_GRASS = BlockStatePredicate.forBlock(Blocks.GRASS);
+    private static final Predicate<BlockState> IS_TALL_GRASS = BlockStatePredicate.forBlock(Blocks.SHORT_GRASS);
     private static final Predicate<BlockState> IS_GRASS_BLOCK = BlockStatePredicate.forBlock(Blocks.GRASS_BLOCK);
     //TODO: fodder
 

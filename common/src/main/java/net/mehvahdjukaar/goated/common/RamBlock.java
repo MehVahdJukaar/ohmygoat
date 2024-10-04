@@ -71,8 +71,14 @@ public class RamBlock extends WaterBlock implements IPistonMotionReact {
     }
 
     @Override
-    public void onMoved(BlockState state, Level level, BlockPos pos, Direction direction, boolean extending, PistonMovingBlockEntity tile) {
-        if(extending) tryBreakAfterMove(state, level, pos, direction);
+    public void onMoved(Level level, BlockPos pos, BlockState movedState, Direction direction, boolean extending) {
+        if (extending) tryBreakAfterMove(movedState, level, pos, direction);
+    }
+
+    //for quark
+    @Override
+    public void onMagnetMoved(Level level, BlockPos pos, Direction direction, BlockState state, BlockEntity blockEntity) {
+        RamBlock.tryBreakAfterMove(state, level, pos, direction);
     }
 
     public static void tryBreakAfterMove(BlockState state, Level level, BlockPos pos, Direction direction) {
@@ -91,7 +97,8 @@ public class RamBlock extends WaterBlock implements IPistonMotionReact {
                     breakProgress += Mth.clamp((int) (speed / blockHardness), 1, 10 - breakProgress);
                     memory.setBreakProgress(breakProgress);
                     if (breakProgress >= 10) {
-                        boolean drop = !toBreak.requiresCorrectToolForDrops() || Items.IRON_PICKAXE.isCorrectToolForDrops(toBreak);
+                        boolean drop = !toBreak.requiresCorrectToolForDrops() || Items.IRON_PICKAXE.isCorrectToolForDrops(
+                                Items.IRON_PICKAXE.getDefaultInstance(), toBreak);
                         level.destroyBlock(toBreakPos, drop, null);
                         memory.setTimestamp(0); //this effectively invalidates it
                         level.gameEvent(null, GameEvent.BLOCK_DESTROY, toBreakPos);
@@ -117,7 +124,7 @@ public class RamBlock extends WaterBlock implements IPistonMotionReact {
     }
 
     @Override
-    public void moveTick(BlockState movedState, Level level, BlockPos pos, AABB aabb, PistonMovingBlockEntity tile) {
+    public void moveTick(Level level, BlockPos pos, BlockState movedState, AABB aabb, PistonMovingBlockEntity tile) {
         if (tile.isExtending()) {
             Direction dir = tile.getDirection();
             float i = 1 - tile.getProgress(0);

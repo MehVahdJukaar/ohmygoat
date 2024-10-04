@@ -14,6 +14,7 @@ public class GoatedClient {
     public static final ModelLayerLocation BARBARIC_HELMET = loc("barbaric_helmet");
 
     public static void init() {
+        ClientHelper.addClientSetup(GoatedClient::setup);
         ClientHelper.addModelLayerRegistration(GoatedClient::registerLayers);
         ClientHelper.addEntityRenderersRegistration(GoatedClient::registerEntityRenderers);
     }

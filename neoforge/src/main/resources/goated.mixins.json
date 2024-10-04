@@ -1,15 +1,14 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "net.mehvahdjukaar.goated.mixins.forge",
-  "compatibilityLevel": "JAVA_16",
-  "plugin": "net.mehvahdjukaar.goated.mixins.forge.MixinPlugin",
+  "package": "net.mehvahdjukaar.goated.mixins.neoforge",
+  "compatibilityLevel": "JAVA_17",
+  "plugin": "net.mehvahdjukaar.goated.mixins.neoforge.MixinPlugin",
   "client": [
   ],
   "mixins": [
     "SelfBarbarianHelmetMixin",
-    "SelfGeepMixin",
-    "SelfCompatQuarkRamBlockMixin"
+    "SelfGeepMixin"
   ],
   "injectors": {
     "defaultRequire": 1

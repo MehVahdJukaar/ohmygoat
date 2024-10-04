@@ -51,7 +51,7 @@ public class GeepAI {
         brain.addActivity(
                 Activity.CORE,
                 0,
-                ImmutableList.of(
+                (ImmutableList<? extends BehaviorControl<? super Geep>>)(Object) ImmutableList.of(
                         new Swim(0.8F),
                         new AnimalPanic(2.0F),
                         new LookAtTargetSink(45, 90),

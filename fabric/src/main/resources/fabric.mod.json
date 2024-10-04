@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "id": "goated",
-  "version": "${version}",
-  "name": "You've Goat to be kidding me",
-  "description": "Ram blocks for automation, Viking helmets and Geeps!",
+  "id": "${mod_id}",
+  "version": "${mod_version}",
+  "name": "${mod_name}",
+  "description": "${mod_description}",
   "authors": [
-    "Mehvahdjukaar, Plantkillable"
+    "${mod_authors}"
   ],
   "contact": {
-    "homepage": "https://www.curseforge.com/minecraft/mc-mods/goated",
-    "sources": "https://github.com/MehVahdJukaar/goated"
+    "homepage": "${mod_homepage}",
+    "sources": "${mod_github}"
   },
-  "license": "ARR",
+  "license": "${mod_license}",
   "icon": "icon.png",
   "environment": "*",
   "entrypoints": {
@@ -24,8 +24,13 @@
     "${mod_id}-common.mixins.json"
   ],
   "depends": {
-    "fabric": "*",
-    "minecraft": ">=1.20",
-    "moonlight": ">=1.20-2.5.0"
+    "fabric": ">=0.92.0+1.20.1",
+    "minecraft": ">=${minecraft_min_version} <${minecraft_max_version}",
+    "moonlight": ">=${moonlight_version_range}"
+  },
+  "suggests": {
+    "sleep_tight": "*",
+    "embeddium": "*",
+    "amendments": "*"
   }
 }

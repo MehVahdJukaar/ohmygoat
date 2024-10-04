@@ -100,7 +100,7 @@ public class BreakMemory {
     }
 
     public static BreakMemory load(CompoundTag c, Level level) {
-        BlockPos pos = NbtUtils.readBlockPos(c.getCompound("pos"));
+        BlockPos pos = NbtUtils.readBlockPos(c ,"pos").orElseThrow();
         int progress = c.getShort("progress");
         var m = new BreakMemory(level.getBlockState(pos), pos, progress);
         m.setTimestamp(level.getGameTime());

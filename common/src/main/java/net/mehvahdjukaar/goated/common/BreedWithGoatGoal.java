@@ -1,9 +1,8 @@
 package net.mehvahdjukaar.goated.common;
 
 import net.mehvahdjukaar.goated.Goated;
-import net.minecraft.advancements.Advancement;
+import net.mehvahdjukaar.moonlight.api.util.Utils;
 import net.minecraft.advancements.CriteriaTriggers;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
@@ -73,13 +72,7 @@ public class BreedWithGoatGoal extends BreedGoal {
             if (serverPlayer != null) {
                 serverPlayer.awardStat(Stats.ANIMALS_BRED);
                 CriteriaTriggers.BRED_ANIMALS.trigger(serverPlayer, mother, father, ageableMob);
-                Advancement advancement = level.getServer().getAdvancements()
-                        .getAdvancement(new ResourceLocation("goated:husbandry/breed_a_geep"));
-                if (advancement != null) {
-                    if (!serverPlayer.getAdvancements().getOrStartProgress(advancement).isDone()) {
-                        serverPlayer.getAdvancements().award(advancement, "unlock");
-                    }
-                }
+                Utils.awardAdvancement(serverPlayer, Goated.res("husbandry/breed_a_geep"));
             }
 
             mother.setAge(6000);
