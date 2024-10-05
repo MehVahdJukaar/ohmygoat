@@ -1,1 +1,1 @@
-updated to 1.21
+fixed loot tables and recipe names being wrong
