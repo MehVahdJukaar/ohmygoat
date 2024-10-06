@@ -1,1 +1,1 @@
-fixed loot tables and recipe names being wrong
+fixed mod recipes being broken

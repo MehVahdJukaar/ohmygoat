@@ -6,11 +6,11 @@
   ],
   "key": {
     "0": {
-      "item": "minecraft:grass"
+      "item": "minecraft:short_grass"
     }
   },
   "result": {
-    "item": "goated:thatch",
+    "id": "goated:thatch",
     "count": 1
   }
 }

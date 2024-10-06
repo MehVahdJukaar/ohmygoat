@@ -16,7 +16,7 @@
       "entries": [
         {
           "type": "minecraft:loot_table",
-          "name": "minecraft:entities/goat"
+          "value": "minecraft:entities/goat"
         }
       ],
       "rolls": 1.0
