@@ -1,17 +1,16 @@
-
 {
-  "block.goated.ram_block": "Козий блок",
+  "block.goated.ram_block": "Блок тарана",
   "block.goated.thatch": "Солома",
-  "block.goated.thatch_slab": "Плита из соломы",
-  "block.goated.thatch_vertical_slab": "Вертикальная плита из соломы",
-  "block.goated.thatch_stairs": "Ступеньки из соломы",
+  "block.goated.thatch_slab": "Соломенная плита",
+  "block.goated.thatch_stairs": "Соломенные ступеньки",
   "entity.goated.geep": "Овцекоза",
+  "item.goated.barbarian_helmet": "Шлем варвара",
   "item.goated.barbaric_helmet": "Варварский шлем",
   "item.goated.geep_spawn_egg": "Яйцо призыва овцекозы",
   "item.goated.chevon": "Сырая козлятина",
   "item.goated.cooked_chevon": "Жареная козлятина",
   "tooltip.goated.barbaric_helmet": "Урон делает тебя сильнее",
-  "advancements.goated.geep.title": "Oh My Goat!",
+  "advancements.goated.geep.title": "О, козлик мой!",
   "advancements.goated.geep.description": "Скрестите овцу и козу",
   "subtitle.goated.geep.long_jump": "Прыжок овцекозы",
   "subtitle.goated.geep.death": "Овцекоза погибает",
@@ -19,5 +18,4 @@
   "subtitle.goated.geep.eat": "Овцекоза ест",
   "subtitle.goated.geep.hurt": "Овцекоза ранена",
   "subtitle.goated.geep.ambient": "Овцекоза блеет"
-
 }
