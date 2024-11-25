@@ -46,8 +46,8 @@ public abstract class SelfBarbarianHelmetMixin extends Item {
             public @NotNull Model getGenericArmorModel(LivingEntity livingEntity, ItemStack itemStack, EquipmentSlot equipmentSlot,
                                                        HumanoidModel<?> original) {
                 var m = model.get();
-                ((HumanoidModel)original).copyPropertiesTo(m);
-               return m;
+                ((HumanoidModel) original).copyPropertiesTo(m);
+                return m;
             }
         });
     }
