@@ -1,1 +1,3 @@
-fixed mod recipes being broken
+- fixed some tags
+- fixed advancement
+- fixed chevon loot

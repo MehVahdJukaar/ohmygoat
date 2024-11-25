@@ -2,7 +2,7 @@
   "parent": "minecraft:husbandry/breed_an_animal",
   "display": {
     "icon": {
-      "item": "minecraft:goat_horn"
+      "id": "minecraft:goat_horn"
     },
     "title": {
       "translate": "advancements.goated.geep.title"
