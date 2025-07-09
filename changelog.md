@@ -1,3 +1,1 @@
-- fixed some tags
-- fixed advancement
-- fixed chevon loot
+fixed helmet stack size
