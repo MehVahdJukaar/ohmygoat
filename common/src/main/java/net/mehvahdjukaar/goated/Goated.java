@@ -92,7 +92,7 @@ public class Goated {
     public static final Supplier<Item> BARBARIC_HELMET = RegHelper.registerItem(
             res("barbaric_helmet"),
             () -> new BarbaricHelmetItem(new Item.Properties()
-                    .maxStackSize(1));
+                    .maxStackSize(1)));
 
     public static final Supplier<Item> RAW_CHEVON = RegHelper.registerItem(
             res("chevon"),
