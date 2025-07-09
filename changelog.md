@@ -1,1 +1,1 @@
-added a tag.minor fixes
+fixed helmet max stack size
