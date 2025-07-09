@@ -23,7 +23,8 @@ import java.util.Set;
 public abstract class GoatMixin {
 
 
-    @ModifyArg(method = "initIdleActivity", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/ai/Brain;addActivityWithConditions(Lnet/minecraft/world/entity/schedule/Activity;Lcom/google/common/collect/ImmutableList;Ljava/util/Set;)V"))
+    @ModifyArg(method = "initIdleActivity", at = @At(value = "INVOKE",
+            target = "Lnet/minecraft/world/entity/ai/Brain;addActivityWithConditions(Lnet/minecraft/world/entity/schedule/Activity;Lcom/google/common/collect/ImmutableList;Ljava/util/Set;)V"))
     private static <E extends LivingEntity> ImmutableList<Pair<Integer, ? extends Behavior<? super E>>>
     registerGeepGoal(Activity activity, ImmutableList<? extends Pair<Integer, ? extends Behavior<? super E>>> tasks,
                      Set<Pair<MemoryModuleType<?>, MemoryStatus>> memoryStatuses) {
