@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.goated.neoforge;
+package net.mehvahdjukaar.goated.platform;
 
 import net.mehvahdjukaar.goated.Goated;
 import net.minecraft.server.level.ServerLevel;

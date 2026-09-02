@@ -1,4 +1,4 @@
-build/
+../build/
 *.ipr
 run/
 *.iws
@@ -8,7 +8,7 @@ out/
 output/
 bin/
 libs/
-
+build/
 .classpath
 .project
 .idea/
@@ -17,3 +17,8 @@ classes/
 .vscode
 .settings
 *.launch
+/unique_lines.txt
+/common/build/
+/fabric/build/
+/neoforge/build/
+/forge/build/

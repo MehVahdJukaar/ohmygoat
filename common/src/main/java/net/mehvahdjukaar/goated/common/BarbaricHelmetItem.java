@@ -1,6 +1,5 @@
 package net.mehvahdjukaar.goated.common;
 
-import dev.architectury.injectables.annotations.PlatformOnly;
 import net.mehvahdjukaar.goated.Goated;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -36,13 +35,11 @@ public class BarbaricHelmetItem extends ArmorItem {
     }
 
     //@Override
-    @PlatformOnly(PlatformOnly.FORGE)
     public void onArmorTick(ItemStack stack, Level level, Player player) {
         applyEffects(player);
     }
 
     @Override
-    @PlatformOnly(PlatformOnly.FABRIC)
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
         super.inventoryTick(stack, level, entity, slotId, isSelected);
         if (entity instanceof LivingEntity le && le.getItemBySlot(EquipmentSlot.HEAD)==stack) {

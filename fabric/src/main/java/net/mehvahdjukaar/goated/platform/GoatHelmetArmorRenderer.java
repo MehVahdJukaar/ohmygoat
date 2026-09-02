@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.goated.fabric;
+package net.mehvahdjukaar.goated.platform;
 
 import com.google.common.base.Suppliers;
 import com.mojang.blaze3d.vertex.PoseStack;

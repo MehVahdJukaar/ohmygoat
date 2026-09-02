@@ -13,10 +13,11 @@
   },
   "license": "${mod_license}",
   "icon": "icon.png",
+  "accessWidener": "goated.accesswidener",
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.mehvahdjukaar.goated.fabric.GoatedFabric"
+      "net.mehvahdjukaar.goated.platform.GoatedFabric"
     ]
   },
   "mixins": [
@@ -24,8 +25,8 @@
     "${mod_id}-common.mixins.json"
   ],
   "depends": {
-    "fabric": ">=0.92.0+1.20.1",
-    "minecraft": ">=${minecraft_min_version} <${minecraft_max_version}",
-    "moonlight": ">=${moonlight_version_range}"
+    "fabric-api": "*",
+    "minecraft": "=${minecraft_version}",
+    "moonlight": ">=${moonlight_min_version}"
   }
 }

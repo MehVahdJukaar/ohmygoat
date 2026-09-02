@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.goated.fabric;
+package net.mehvahdjukaar.goated.platform;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;

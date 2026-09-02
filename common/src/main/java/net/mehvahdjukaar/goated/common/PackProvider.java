@@ -37,11 +37,6 @@ public class PackProvider extends DynServerResourcesGenerator {
     }
 
     @Override
-    public boolean dependsOnLoadedPacks() {
-        return true;
-    }
-
-    @Override
     public void regenerateDynamicAssets(ResourceManager manager) {
 
         ResourceLocation res = ResourceLocation.withDefaultNamespace("entities/goat");

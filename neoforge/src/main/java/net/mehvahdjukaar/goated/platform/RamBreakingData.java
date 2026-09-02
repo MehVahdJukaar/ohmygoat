@@ -1,4 +1,4 @@
-package net.mehvahdjukaar.goated.neoforge;
+package net.mehvahdjukaar.goated.platform;
 
 import net.mehvahdjukaar.goated.common.BreakMemory;
 import net.minecraft.core.BlockPos;
