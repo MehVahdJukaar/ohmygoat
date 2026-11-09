@@ -18,6 +18,10 @@ public class FabricRamBreakingHandler {
 
     private static final Map<ServerLevel, Map<BlockPos, BreakMemory>> breakProgress = new HashMap<>();
 
+    public static void clear() {
+        breakProgress.clear();
+    }
+
     public static void tick(MinecraftServer minecraftServer) {
         minecraftServer.getAllLevels().forEach(FabricRamBreakingHandler::validateAll);
     }

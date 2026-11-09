@@ -1,6 +1,7 @@
 package net.mehvahdjukaar.goated.platform;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.mehvahdjukaar.goated.Goated;
 import net.mehvahdjukaar.moonlight.api.platform.ClientHelper;
@@ -12,6 +13,7 @@ public class GoatedFabric implements ModInitializer {
     public void onInitialize() {
         Goated.commonInit();
         ServerTickEvents.START_SERVER_TICK.register(FabricRamBreakingHandler::tick);
+        ServerLifecycleEvents.SERVER_STOPPED.register(s -> FabricRamBreakingHandler.clear());
 
         if (PlatHelper.getPhysicalSide().isClient()) {
             ClientHelper.addClientSetup(GoatHelmetArmorRenderer::register);
