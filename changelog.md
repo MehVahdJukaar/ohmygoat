@@ -1,1 +1,1 @@
-fixed helmet stack size
+- fixed a leak on rejoin

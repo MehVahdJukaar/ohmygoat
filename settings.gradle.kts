@@ -3,7 +3,6 @@ import com.possible_triangle.gradle.settings.ResolutionStrategy
 
 pluginManagement {
     repositories {
-        maven { url = uri("https://maven.muon.rip/releases") }
         gradlePluginPortal()
         mavenLocal()
     }
